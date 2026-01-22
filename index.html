@@ -3,633 +3,629 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Braverman Personality Type Assessment (Offline)</title>
+<title>Braverman Personality Type Assessment</title>
 <style>
-
-:root {{
-  --bg: #0b0c10;
-  --card: #151924;
-  --text: #eef0f4;
-  --muted: #aeb3c0;
-  --border: #343b4a;
-  --shadow: 0 8px 24px rgba(0,0,0,.32);
-  --u-bg: #2c3240;
-  --u-fg: #c9ced9;
-  --f-bg: #b89200;
-  --f-fg: #16130a;
-  --t-bg: #0b6b3a;
-  --t-fg: #eafff3;
-  --focus: #7aa2ff;
-}}
-* {{ box-sizing: border-box; }}
-html, body {{ height: 100%; }}
-body {{
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(180deg, #07080d 0%, var(--bg) 55%, #07080d 100%);
-  color: var(--text);
-  line-height: 1.45;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}}
-header {{
-  position: sticky; top: 0; z-index: 10;
-  background: rgba(6,7,10,.86);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
-}}
-.container {{
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 16px 14px 128px;
-}}
-.topbar {{
-  display: flex; gap: 12px; align-items: center; justify-content: space-between;
-  padding: 12px 14px;
-}}
-h1 {{ font-size: 16px; margin: 0; letter-spacing: .2px; }}
-.badges {{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end; }}
-.badge {{
-  border: 1px solid var(--border);
-  background: rgba(20,22,28,.8);
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  color: var(--muted);
-}}
-.tabs {{ display:flex; gap:8px; padding: 0 14px 12px; }}
-.tab {{
-  flex:1;
-  border: 1px solid var(--border);
-  background: rgba(20,22,28,.7);
-  color: var(--text);
-  line-height: 1.45;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: 11px 12px;
-  border-radius: 14px;
-  font-weight: 600;
-  font-size: 13px;
-}}
-.tab[aria-selected="true"] {{
-  outline: 2px solid rgba(122,162,255,.35);
-  border-color: rgba(122,162,255,.5);
-}}
-.card {{
-  border: 1px solid var(--border);
-  background: rgba(21,25,36,.85);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  padding: 16px;
-  margin: 16px 0;
-}}
-.card h2 {{ margin:0 0 6px 0; font-size: 15px; }}
-.card p {{ margin: 8px 0; color: var(--muted); line-height: 1.35; font-size: 13px; }}
-.group-meta {{ display:flex; gap:10px; align-items:baseline; justify-content:space-between; flex-wrap:wrap; }}
-.group-score {{ font-size: 12px; color: var(--muted); }}
-.list {{ margin-top:10px; display:grid; gap:10px; }}
-.item {{
-  border: 1px solid rgba(52,59,74,.95);
-  border-radius: 14px;
-  padding: 12px;
-  background: rgba(10,12,18,.55);
-}}
-.item + .item {{ margin-top: 12px; }}
-.item-text {{ font-size:13px; line-height:1.35; margin:0 0 10px 0; }}
-.tri {{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }}
-.tri button {{
+:root{
+  --bg:#f7f7f9;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#475569;
+  --border:#d7dbe3;
+  --shadow:0 6px 18px rgba(15,23,42,.08);
+  --u-bg:#eef1f5;
+  --u-fg:#334155;
+  --f-bg:#d8b200; /* golden yellow */
+  --f-fg:#1f2937;
+  --t-bg:#0b6b3a; /* dark green */
+  --t-fg:#ffffff;
+  --focus:#2563eb;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text","SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.35;
+}
+a{color:var(--focus); text-decoration:none}
+a:hover{text-decoration:underline}
+.container{
+  max-width:980px;
+  margin:0 auto;
+  padding:18px 14px 88px;
+}
+.header{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:14px;
+}
+.title{
+  font-size:28px;
+  letter-spacing:-0.02em;
+  margin:0;
+}
+.metaRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 14px;
+  align-items:center;
+  color:var(--muted);
+  font-size:14px;
+}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
   border:1px solid var(--border);
-  border-radius:12px;
-  padding:11px 10px;
-  font-weight:700;
-  font-size:13px;
-  background: rgba(42,47,58,.35);
-  color: var(--text);
-  line-height: 1.45;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}}
-.tri button:focus {{ outline:2px solid var(--focus); outline-offset:2px; }}
-.tri button[data-state="u"][aria-pressed="true"] {{ background: var(--u-bg); color: var(--u-fg); }}
-.tri button[data-state="f"][aria-pressed="true"] {{ background: var(--f-bg); color: var(--f-fg); }}
-.tri button[data-state="t"][aria-pressed="true"] {{ background: var(--t-bg); color: var(--t-fg); }}
-.small-actions {{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }}
-.small-actions button, .small-actions select {{
+  border-radius:999px;
+  background:var(--card);
+  box-shadow:0 1px 0 rgba(15,23,42,.04);
+}
+.pill strong{color:var(--text)}
+.tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.tabBtn{
   border:1px solid var(--border);
-  background: rgba(20,22,28,.7);
-  color: var(--text);
-  line-height: 1.45;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background:var(--card);
   padding:10px 12px;
   border-radius:12px;
-  font-weight:700;
-  font-size:12px;
-}}
-.small-actions button:focus, .small-actions select:focus {{ outline:2px solid var(--focus); outline-offset:2px; }}
-details {{ border:1px solid var(--border); border-radius:14px; padding:10px 12px; background: rgba(10,11,16,.25); }}
-summary {{ cursor:pointer; font-weight:800; font-size:12px; color: var(--text);
-  line-height: 1.45;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }}
-pre {{ white-space: pre-wrap; word-break: break-word; color: var(--muted); margin:10px 0 0 0; font-size:12px; line-height:1.35; }}
-footer {{
-  position: fixed; left:0; right:0; bottom:0;
-  border-top: 1px solid var(--border);
-  background: rgba(6,7,10,.86);
-  backdrop-filter: blur(10px);
-}}
-.footer-inner {{
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 10px 14px;
-  display:grid;
-  grid-template-columns: 1fr auto;
-  gap:10px;
-  align-items:center;
-}}
-.footer-scores {{ display:flex; flex-wrap:wrap; gap:8px; }}
-.footer-actions {{ display:flex; gap:10px; }}
-.footer-actions button {{
+  font-weight:600;
+  color:var(--text);
+  box-shadow:0 1px 0 rgba(15,23,42,.04);
+}
+.tabBtn[aria-selected="true"]{
+  outline:2px solid rgba(37,99,235,.25);
+  border-color:rgba(37,99,235,.55);
+}
+.card{
+  background:var(--card);
   border:1px solid var(--border);
-  background: rgba(20,22,28,.8);
-  color: var(--text);
-  line-height: 1.45;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: 11px 12px;
-  border-radius: 14px;
-  font-weight: 900;
-  font-size: 12px;
-}}
-@media (min-width: 900px) {{
-  .layout {{ display:grid; grid-template-columns: 1fr 320px; gap:14px; align-items:start; }}
-  .sidepanel {{ position: sticky; top: 108px; }}
-}}
-
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:14px;
+  margin:14px 0;
+}
+.cardHeader{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+  margin-bottom:10px;
+}
+.cardHeader h2{
+  margin:0;
+  font-size:18px;
+}
+.cardHeader .sub{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:13px;
+}
+.groupScore{
+  min-width:86px;
+  text-align:right;
+  color:var(--muted);
+  font-weight:700;
+}
+.divider{
+  height:1px;
+  background:var(--border);
+  margin:10px 0 8px;
+}
+.legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:8px;
+}
+.legendItem{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:var(--card);
+  font-size:13px;
+  color:var(--muted);
+}
+.swatch{width:14px;height:14px;border-radius:4px;border:1px solid rgba(0,0,0,.08)}
+.swatch.u{background:var(--u-bg)}
+.swatch.f{background:var(--f-bg)}
+.swatch.t{background:var(--t-bg)}
+.qList{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.qRow{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px;
+  background:linear-gradient(#fff,#fff);
+}
+.qTop{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  justify-content:space-between;
+}
+.qText{
+  font-size:15px;
+  margin:0;
+  padding-right:8px;
+}
+.seg{
+  display:inline-flex;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background:var(--card);
+  flex-shrink:0;
+}
+.seg button{
+  border:0;
+  background:transparent;
+  padding:10px 12px;
+  font-weight:700;
+  font-size:13px;
+  color:var(--muted);
+  min-width:44px;
+}
+.seg button:focus{outline:2px solid rgba(37,99,235,.35); outline-offset:-2px}
+.seg button.active.u{background:var(--u-bg); color:var(--u-fg)}
+.seg button.active.f{background:var(--f-bg); color:var(--f-fg)}
+.seg button.active.t{background:var(--t-bg); color:var(--t-fg)}
+.hint{
+  margin:0;
+  margin-top:8px;
+  font-size:12px;
+  color:var(--muted);
+}
+.details summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--text);
+}
+.details .content{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:14px;
+}
+.resultsGrid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+@media (min-width:760px){
+  .resultsGrid{grid-template-columns:1fr 1fr}
+  .title{font-size:34px}
+}
+.stickyBar{
+  position:fixed;
+  left:0; right:0; bottom:0;
+  background:rgba(247,247,249,.92);
+  backdrop-filter:saturate(180%) blur(12px);
+  border-top:1px solid var(--border);
+  padding:10px 12px;
+}
+.stickyInner{
+  max-width:980px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.actions{
+  display:flex;
+  gap:10px;
+}
+.btn{
+  border:1px solid var(--border);
+  background:var(--card);
+  padding:10px 12px;
+  border-radius:12px;
+  font-weight:800;
+}
+.btn.primary{
+  border-color:rgba(37,99,235,.55);
+  outline:2px solid rgba(37,99,235,.18);
+}
+.mini{
+  font-size:13px;
+  color:var(--muted);
+  font-weight:700;
+}
+pre{
+  white-space:pre-wrap;
+  word-break:break-word;
+  background:#f1f5f9;
+  border:1px solid var(--border);
+  padding:12px;
+  border-radius:12px;
+  color:#0f172a;
+}
 </style>
 </head>
 <body>
-<header>
-  <div class="topbar">
-    <h1>Braverman Personality Type Assessment</h1>
-    <div class="badges">
-      <div class="badge" id="progressBadge">Progress: 0/0</div>
-      <div class="badge" id="savedBadge">Saved</div>
-    </div>
-  </div>
-  <div class="tabs" role="tablist" aria-label="Assessment sections">
-    <button class="tab" id="tab-part1" role="tab" aria-selected="true" aria-controls="panel-part1">Part 1</button>
-    <button class="tab" id="tab-part2" role="tab" aria-selected="false" aria-controls="panel-part2">Part 2</button>
-    <button class="tab" id="tab-results" role="tab" aria-selected="false" aria-controls="panel-results">Results</button>
-  </div>
-</header>
-
 <div class="container">
-  <div id="panel-part1" role="tabpanel" aria-labelledby="tab-part1">
-    <div class="card">
-      <h2>Instructions</h2>
-      <p id="p1Instr"></p>
-      <div class="small-actions">
-        <label style="display:flex;gap:8px;align-items:center;">
-          <span style="color:var(--muted);font-weight:800;font-size:12px;">“See more” style</span>
-          <select id="seeMoreStyle">
-            <option value="details">Accordion (inline)</option>
-            <option value="modal">Modal</option>
-            <option value="sheet">Bottom sheet</option>
-          </select>
-        </label>
-      </div>
-      <details style="margin-top:10px;">
-        <summary>How to answer</summary>
-        <pre>Each statement has 3 states:
-- Unanswered (gray)
-- False (golden yellow)
-- True (dark green)
-
-Tap the state you want. Your progress saves automatically in this browser.</pre>
-      </details>
+  <div class="header">
+    <h1 class="title" id="mainTitle"></h1>
+    <div class="metaRow">
+      <span class="pill"><strong>Progress:</strong> <span id="progressText">0/0</span></span>
+      <span class="pill" id="savedFlag" aria-live="polite"></span>
     </div>
-    <div id="part1Groups"></div>
+    <div class="tabs" id="tabs" role="tablist" aria-label="Sections"></div>
   </div>
 
-  <div id="panel-part2" role="tabpanel" aria-labelledby="tab-part2" hidden>
-    <div class="card">
-      <h2>Instructions</h2>
-      <p id="p2Instr"></p>
-      <details style="margin-top:10px;">
-        <summary>How to answer</summary>
-        <pre>Use the same 3-state control. These questions are about how you feel right now.</pre>
-      </details>
-    </div>
-    <div id="part2Groups"></div>
+  <div class="card" id="instructions">
+    <!-- instructions injected -->
   </div>
 
-  <div id="panel-results" role="tabpanel" aria-labelledby="tab-results" hidden>
-    <div class="layout">
-      <div>
-        <div class="card">
-          <h2>Live results</h2>
-          <p>Dominant nature is the highest Part 1 total. Deficiency severity follows the printed ranges.</p>
-          <div id="resultsBody"></div>
-        </div>
-      </div>
-      <div class="sidepanel">
-        <div class="card">
-          <h2>Controls</h2>
-          <div class="small-actions">
-            <button id="resetBtn">Reset all answers</button>
-            <button id="exportBtn">Export answers (JSON)</button>
-          </div>
-          <details style="margin-top:10px;">
-            <summary>What “Reset” does</summary>
-            <pre>Clears saved answers for this assessment in localStorage.</pre>
-          </details>
-        </div>
-        <div class="card">
-          <h2>Legend</h2>
-          <div class="small-actions">
-            <span class="badge" style="background:var(--u-bg);color:var(--u-fg);border-color:transparent;">Unanswered</span>
-            <span class="badge" style="background:var(--f-bg);color:var(--f-fg);border-color:transparent;">False</span>
-            <span class="badge" style="background:var(--t-bg);color:var(--t-fg);border-color:transparent;">True</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:999;"></div>
-  <div id="modal" style="display:none; position:fixed; inset:10% 6%; background:rgba(20,22,28,.98); border:1px solid var(--border); border-radius:16px; padding:14px; z-index:1000; box-shadow: var(--shadow); overflow:auto;">
-    <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
-      <div style="font-weight:900;" id="modalTitle"></div>
-      <button id="modalClose" style="border:1px solid var(--border); background:rgba(10,11,16,.45); color:var(--text); padding:8px 10px; border-radius:12px; font-weight:900;">Close</button>
-    </div>
-    <pre id="modalBody"></pre>
-  </div>
-  <div id="sheet" style="display:none; position:fixed; left:0; right:0; bottom:0; max-height:75vh; background:rgba(20,22,28,.98); border-top:1px solid var(--border); border-radius:16px 16px 0 0; padding:14px; z-index:1000; box-shadow: var(--shadow); overflow:auto;">
-    <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
-      <div style="font-weight:900;" id="sheetTitle"></div>
-      <button id="sheetClose" style="border:1px solid var(--border); background:rgba(10,11,16,.45); color:var(--text); padding:8px 10px; border-radius:12px; font-weight:900;">Close</button>
-    </div>
-    <pre id="sheetBody"></pre>
-  </div>
-
+  <div id="content"></div>
 </div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-scores" id="footerScores"></div>
-    <div class="footer-actions">
-      <button id="jumpResults">Results</button>
-      <button id="resetBtn2">Reset</button>
+<div class="stickyBar" role="region" aria-label="Actions">
+  <div class="stickyInner">
+    <div class="mini" id="stickyProgress">Progress: 0/0</div>
+    <div class="actions">
+      <button class="btn primary" type="button" id="btnResults">Results</button>
+      <button class="btn" type="button" id="btnReset">Reset</button>
     </div>
   </div>
-</footer>
+</div>
 
 <script>
-const DATA = {"meta": {"title": "Braverman Personality Type Assessment", "storageKey": "braverman_assessment_v1"}, "part1": {"instructions": "Answer in terms of how you feel most of the time. Record the total number of true statements in each group.", "groups": [{"id": "1A", "label": "1A Dopamine Nature", "short": "Dopamine", "items": ["I find it easy to process my thoughts", "I concentrate effectively", "I am a deep thinker", "I am a quick thinker", "I become distracted because", "I do so many tasks at once", "I enjoy intense debate", "I have a good imagination", "I tend to criticize and analyze my thoughts", "I have a lot of energy most of the time", "My blood pressure is often elevated", "Sometimes in my life I have had episodes of extreme energy", "I have insomnia", "I find exercising invigorating", "I don\u2019t ordinarily need coffee to jump- start me in the morning", "My veins are visible and tend to look as though they might pop out of my skin I tend to have a high body temperature", "I eat my lunch while I\u2019m working", "I engage in sexual intercourse any chance", "I get", "I have a temper", "I eat only to reenergize my body", "I love action movies", "Exercising makes me feel powerful", "Personality I am a very domineering individual", "I sometimes don\u2019t notice my feelings", "I often have trouble listening to others because my own ideas dominate", "I have been in many fights", "I tend to be future-oriented", "I am sometimes speculative", "Most people view me as thinking-oriented", "I daydream and often fantasize", "I like to read history and other non-fiction books", "I admire ingenuity", "I can be slow in identifying how people can cause trouble", "onality Type Assessment ature her for True or for False. At the end of each group, n the space provided. ost of the time. For example, if you\u2019ve had a bad night\u2019s that pertain to your energy levels based on how you feel I don\u2019t usually get tricked by people who say they need my help", "Most people view me as innovative", "People have thought I have had some strange ideas, but I can always explain the basis for them rationally", "I am often agitated or irritated", "Little things make me anxious or upset", "I have fantasies of unlimited power", "I love spending money", "I dominate others in relationships", "I am very hard on myself", "I react aggressively to criticism, often becoming defensive in front of others", "Some individuals view me as tough- minded", "Most people view me as achievement- oriented", "Some people say that I am irrational", "I will do anything to reach a goal", "I value a religious philosophy", "Incompetence makes me angry", "I have high standards for myself and for others"]}, {"id": "2A", "label": "2A Acetylcholine Nature", "short": "Acetylcholine", "items": ["F F My memory is very strong", "F I am an excellent listener", "F I am good at remembering stories", "F I usually do not forget a face", "F I am very creative", "F I have an excellent attention span and rarely miss a thing", "F I have many good hunches", "F I notice everything going on around me", "I have a good imagination", "F I tend to have a slow pulse", "My body has excellent tone", "I have a great figure/build", "I have really low cholesterol", "When I eat, I love to experience the aromas and the beauty of food", "I love yoga and stretching my muscles", "During sex, I am very sensual", "I have had an eating disorder at some point in my life", "I have tried many alternative remedies", "Personality I am a perpetual romantic", "I am in touch with my feelings", "I tend to make decisions based on hunches", "I like to speculate", "Some people say I have my head in the clouds", "I love reading fiction", "I have a rich fantasy life", "I am creative when solving people problems", "I am very expressive; I like to talk about what\u2019s bothering me", "I am buoyant", "I believe that it is possible to have a mystical experience", "I believe in being a soul mate", "Sometimes the mystical can excite me", "I tend to overreact to my body", "I find it easy to change things; I am not set in my ways", "I am deeply in touch with my emotions", "I tend to love someone one minute and hate him or her the next", "I am flirtatious", "I don\u2019t mind spending money if it benefits my relationships", "I tend to fantasize when I\u2019m having sex", "My relationships tend to be filled with romance", "I love watching romantic movies", "I take risks in my love life", "I foresee a better future", "I am inspired to help other people", "I believe that all things are possible, particularly for those who are devoted", "I am good at creating harmony between people", "Charity and altruism come from the heart, and I have plenty of both", "Others think me of as having vision", "F My thoughts on religion often change", "F I am an idealist, but not a perfectionist", "F I\u2019m happy with someone who just F treats me right"]}, {"id": "3A", "label": "3A GABA Nature", "short": "GABA", "items": ["F F I have a stable attention span and can follow other people\u2019s logic", "F I enjoy reading people more than books", "F I retain most of what I hear", "I can remember facts people tell me", "F I learn from my experiences", "F I am good at remembering names", "I can focus very well on tasks and F people\u2019s stories", "F F I find it easy to relax", "I am a calm person", "F I find it easy to fall asleep at night", "I tend to have high physical endurance", "F I have low blood pressure", "F I do not have a family history of stroke", "When it comes to sex, I am not very F experimental", "F I have little muscle tension", "F Caffeine has little effect on me", "F I take my time eating my meals", "I sleep well", "F I don\u2019t have many harmful food cravings F such as sugar", "Exercising is a regimented habit for me", "F Personality F I am not very adventurous", "I do not have a temper", "F I have a lot of patience", "F I don\u2019t enjoy philosophy", "I love watching sitcoms about families", "F I dislike movies about other worlds F or universes", "F I am not a risk-taker", "I keep past experiences in mind before I F make decisions", "F I am a realistic person", "I believe in closure", "I like facts and details", "F When I make a decision, it\u2019s permanent", "I like to plan my day, week, month, etc.", "F I collect things", "I am a little sad", "F I am afraid of confrontations and altercations", "I save up a lot of money in the event of a crisis T I tend to create strong, lasting bonds with others", "I am a stable pillar in people\u2019s lives", "I believe in the adage \u201cEarly to bed, early to rise.\u201d", "I believe in meeting deadlines", "I try to please others the best I can T I am a perfectionist", "I am good at maintaining long-lasting relationships", "I pay attention to where my money goes", "I believe that the world would be more peaceful if people would improve upon their morals", "I am very loyal and devoted to my loved ones T I have high ethical standards that I live by", "I pay close attention to laws, principles, and policies", "I believe in participating in service for the community"]}, {"id": "4A", "label": "4A Serotonin Nature", "short": "Serotonin", "items": ["I can easily concentrate on manual-labor tasks", "I have a good visual memory", "I am very perceptive", "I am an impulsive thinker", "I live in the here and now", "I tend to say, \u201cTell me the bottom line.\u201d", "I am a slow book learner, but I learn easily from experience", "I need to experience something or work at it hands-on in order to understand it", "I sleep too much", "When it comes to sex, I am very experimental", "I have low blood pressure", "I am very action-oriented", "I am very handy around the house", "I am very active outdoors", "I engage in daring activities such as skydiving and motorcycle riding", "I can solve problems spontaneously", "I rarely have carbohydrate cravings", "I usually grab a quick meal on the run", "F I\u2019m usually not very consistent with my exercise routine; I may exercise F daily for three weeks and then skip it for a month", "F Personality F I live life in the immediate moment", "I like to perform/entertain in public", "I tend to gather facts in an unorganized F manner", "F I am very flexible", "F I am a great negotiator", "F I often just like to \u201ceat, drink, and be merry\u201d", "F I am dramatic", "F I am very artistic", "I am a good craftsman", "I\u2019m a risk taker when it comes to sports", "F I believe in psychics", "I can easily take advantage of others", "F I am cynical of others\u2019 philosophies", "F I like to have fun", "My favorite type of movies are horror F flicks", "I am fascinated with weapons", "F I rarely stick to a plan or agenda", "I have trouble remaining faithful", "I am easily able to separate and move on when relationships with loved ones end", "I don\u2019t pay much attention to how I spend my money", "I have many frivolous relationships", "F F I always keep my options open in case F something better comes up", "F I don\u2019t like working hard for long periods F of time", "F I believe things should have a function and purpose", "F I am optimistic", "I live in the moment", "F I pray only when I\u2019m in need of spiritual support", "F I don\u2019t have particularly high morals and ethical values", "F I do what I want, when I want to", "F I don\u2019t care about being perfect; I just F live my life", "F Savings are for suckers"]}], "descriptions": {"Dopamine": "DOPAMINE NATURE If you have a dopamine nature, you are part of 17% of the population. When you are balanced, you are likely to be strong-willed who knows exactly what you want and how to get it. You are fast on your feet and self-confident. You are highly rational, more comfortable with facts and figures than with feelings and emotions. You are able to assess yourself critically, but you may not respond well to the criticisms of others. You focus intently on the task at hand and take pride in achievement. Strategic thinking, masterminding, inventing, problem solving, envisioning, and pragmatism are exciting and you function well under stress. A majority of doctors, scientists, researchers, inventors, engineers, generals and architects are dopamine dominant, but this does not preclude you from other professions. You may like to play chess, listen to books on tape, or do difficult crossword puzzles. You are tireless, perhaps overly alert, and may need less sleep than others. When exercising, you may enjoy weight-lifting more than aerobic activities. You may not be overly sensitive and miss it when others consider their feelings more important than your reasons. You may be distant from your children, and the stability of your marriage may depend on the loyalty and goodwill of your spouse. Excessive dopamine Too much dopamine can lead to excessive risk-taking behaviors and impulsive actions. Violence and over-control of others may be recurrent problems. Sexual activity level might be too high for sustained relationships to endure, as extramarital sexual activity may result. As teenagers, reckless driving, shoplifting, or date rape may result if you did not learn to balance your dopamine extremes in time.", "Acetylcholine": "ACETYLCHOLINE NATURE You are adept at working with your senses and view the world in sensory terms. You are highly creative and open to new ideas. You are a quick thinker who is always taking other people into consideration. You are devoted to making things the best they can be, no matter how much effort it requires. You are flexible, creative, and spontaneous, and are willing to try anything new as long as it promises to be new and exciting. If your acetylcholine nature is in balance, you are intuitive and innovative. You take pleasure in anything involving words, ideas, and communication. (Acetylcholine is produced to a great extent in the parietal lobes of the brain, which is responsible for language, intelligence, and comprehension) You may be ideal in the roles as counselor, mediator, think tank member, yoga and meditation instructor, religious leader, and in public service. Strong acetylcholine levels are associated with high brain speed, which impacts the creative function, so artists, writers, advertising professionals, and actors are frequently acetylcholine dominant. You are extremely social, even charismatic. You love meeting and greeting and making new friends. You come across to others as authentic and grounded. People find you charming, and you find relationships come easy to you. You invest a great deal of energy and time into your relationships and feel that you are personally reaping the rewards. You are an optimist, and your see the possibilities in people. You are attentive to the needs of children and romantic with you significant other. You are good at remembering other people\u2019s feelings and reactions, and this enables you to not hurt others. You are altruistic and benevolent. You love adventure. You are open to new things and not afraid of failure. You like to travel, but you can also enjoy reading about the lives of others. Your quest for learning makes you interested in a variety of topics and adept at sharing your knowledge with others. 4 Too Much Acetylcholine You may give too much of yourself, to the point of not considering your own needs or becoming masochistic. You may feel the world is taking advantage of you, or become paranoid. You may become socially isolated as a result. Panic disorder, manic episodes, or anxiety can result.", "GABA": "GABA NATURE A person with a GABA nature is stable. Almost 50% of the world share this nature, whose hallmarks are consistency, sociability, and concern for others. If you have a GABA nature, you will likely show up every day for work and be there when others need you. When your GABA is in balance, you remain calm when chaos swirls around you. Characteristics of objectivity, levelheadedness, punctuality, practicality, and confidence all come naturally to you. Staying organized is very important to you, and rigid schedules are comforting rather than confining \u2013 they eliminate uncertainty and ensure smooth sailing. GABA dominant people tend to gravitate to careers as administrators, accountants, security officers, nurses, medical technicians, air-traffic controllers, news reporters, EMT\u2019s, meeting planners, bus drivers, and homemakers. No matter what the job, the GABA-natured person is the one who tethers the group, who stays focused on the matter at hand, yet usually defers to the majority. You are the consummate team player, deriving pleasure from fulfilling your obligations and taking care of those you love. You are sensible, settled, and not prone to wide swings of emotion or outbursts of anger. You both relish group activities and cherish one-to-one connections. Making others comfortable makes you happy. Marriage is seen as a long-term haven. You probably believe in traditions and institutions, and enjoy your part in making them work, especially at your place of worship. You look forward to holiday gatherings, and planning for them seems more like play than work. You probably like history books and biographies. Collecting memorabilia and creating scrapbooks may provide hours of entertainment. There are times when you feel you\u2019ve had a strong nurturing effect on others, such as after hosting a holiday dinner. EXCESS GABA Producing too much GABA may ratchet up your nurturing tendencies to the point where you ignore your own needs or end up getting hurt. You may spend too much energy looking for love, and then relying too heavily on you mates. You may look too much to authority figures for advice and continuously craving and following the advice of others.", "Serotonin": "SEROTONIN NATURE Serotonin resynchronizes your brain while you sleep so you wake every morning with a fresh start. If you have a serotonin nature, you are among 17% of the population who really know how to enjoy themselves. Serotonin is associated with delta waves (which are produced in abundance when we sleep) and affects our ability to rest, regenerate, and find security. If you have a serotonin nature, you know how to live in the moment. You are a realist, keenly responsive to sensory input, yet you can be impulsive, too. You love to participate in activities for the \u201clove of the game\u201d and not as a means to an end. Achievement to you means getting something done now. You thrive on change \u2013 you\u2019ll alternate tasks and find new ways of doing repetitive ones. You will try new foods, pick up a new hobby, and plan a different vacation every year. When balanced, a person with a serotonin nature is receptive to stimuli, in touch with both mind and body, often physically coordinated, and very resourceful. You are not put off by struggle and undeterred by setbacks. If your work doesn\u2019t feel like play, it is not worth doing. Your serotonin nature is ideal for professions requiring motor skills, hand-eye coordination, flexibility, and crisis management. Tools are extensions of the serotonin brain. Construction workers, oil riggers, truck and ambulance drivers, military personnel, hairstylists, bartenders, pilots, and computer programmers \u2013 who get to play with the most advanced and expensive tools \u2013 are all likely to have a serotonin nature. Professional athletes, movie stars, photographers, and fashion models might also have serotonin natures. Serotonin dominance would also be essential for trouble-shooting business executives hired to save floundering companies; for surgeons, orthopedists, and chiropractors; for detectives and investigators; and 5 for specialists in crisis intervention. If there is excitement anywhere, you will find it, whether it be parties, celebrations, video games, casino gambling, mountain climbing, hunting, skydiving, hang-gliding, skiing, or scuba diving. You are passionate in your relationships, but refuse to be tied down. It is important that those close to you recognize your need for freedom. You can be the life of the party; you can be cheerful, optimistic, and easygoing. You want everyone to join in and be part of your fun. You may have a special fondness for children, although you may be overwhelmed by the commitment needed to care for them. You delight in playing with them, and the roles of a favorite aunt, uncle or grandparent appeal the most to you. You are intensely loyal to coworkers, friends, and family. People appreciate your practical side and the way you make the best of any situation. You have many and varied friendships, but they may be more broad than deep. Your impulsivity and desire for new experiences may move you away before deeper roots are formed. You disdain order and routine, and with your love for independence, this can put a strain on your closest relationships. When you are maximizing your serotonin mature, you experience serenity throughout the day. You experience highs doing what others consider dangerous, such as bungee jumping, motorboat racing, whitewater rafting, motorcycling, or just staying out all night carousing. When you play hard, your body is in serotonin overdrive, and you are having the time of your life. TOO MUCH SEROTONIN Producing too much serotonin can make you extremely nervous. You can become hesitant, distracted, vulnerable to any manner of criticism, and morbidly afraid of being disliked. In the extreme, someone with an excessive serotonin personality is painfully shy and sees himself as inadequate and inferior. Such people are plagued by sadness, anger, and a desperate desire for interpersonal interaction, which, ironically, they are too fearful to attempt. 6"}}, "part2": {"instructions": "Answer in terms of how you feel right now. It doesn\u2019t matter how long you\u2019ve had the symptoms.", "groups": [{"id": "1B", "label": "1B Dopamine Deficiency", "short": "Dopamine", "items": ["I have trouble paying consistent attention and concentrating", "I need caffeine to wake up", "I cannot think quickly enough", "I do not have a good attention span", "I have trouble getting through a task even when it is interesting to me", "I am slow in learning new ideas", "I crave sugar", "I have decreased libido", "I sleep too much", "I have a history of alcohol or addiction", "I have recently felt worn out for no apparent reason", "I sometimes experience total exhaustion without even exerting myself", "I have always battled weight problems", "I have little motivation for sexual", "experiences", "I have little trouble getting out of bed in the morning", "I have had a craving for cocaine, amphetamines, or Ecstasy", "Personality I feel fine just following others", "People seem to take advantage of me", "I am feeling very down or depressed", "People have told me I am too mellow", "I have little urgency", "I let people criticize me", "I always look to others to lead me", "I have lost my reasoning skills", "I can\u2019t make good decisions"]}, {"id": "2B", "label": "2B Acetylcholine Deficiency", "short": "Acetylcholine", "items": ["I lack imagination", "I have difficulty remembering names when", "I first meet people", "I have noticed that my memory ability is decreasing", "My significant other tells me I don\u2019t have romantic thoughts", "I can\u2019t remember my friend\u2019s birthday", "I have lost some of my creativity", "I have insomnia", "I have lost muscle tone", "I don\u2019t exercise anymore", "I crave fatty food", "I have experimented with hallucinogens or other illicit drugs", "I feel like my body is falling apart", "I can\u2019t breathe easily", "Personality I don\u2019t feel joy very often", "I feel despair", "I protect myself from being hurt by others by never telling much about myself", "I find it more comfortable to do things alone rather than in a large group", "people get angrier about bothersome things than I do", "I give in easily and tend to be submissive", "I rarely feel passionate about anything", "I like routine", "I don\u2019t care about anyone\u2019s stories but my own", "I don\u2019t pay attention to people\u2019s feelings", "I don\u2019t feel buoyant", "I\u2019m obsessed with my deficiencies"]}, {"id": "3B", "label": "3B GABA Deficiency", "short": "GABA", "items": ["I find it difficult to concentrate because I\u2019m nervous and jumpy", "I can\u2019t remember phone numbers", "I have trouble finding the right word", "I have trouble remembering things when", "I am put on the spot", "I know", "I am intelligent, but it is hard to show others", "My ability to focus comes and goes", "When I read, I find I have to go back over the same paragraph a few times to absorb the information", "I am a quick thinker but can\u2019t always say what", "I mean", "I feel shaky", "I sometimes tremble", "I have frequent backaches and/or headaches", "I tend to have shortness of breath", "I tend to have heart palpitations", "I tend to have cold hands", "I sometimes sweat too much", "I am sometimes dizzy", "I often have muscle tension", "I tend to get butterflies in my stomach", "I crave bitter foods", "I am often nervous", "I like yoga because it helps me to relax", "I often feel fatigued even when", "I have had a good night\u2019s sleep", "I overeat", "Personality I have mood swings", "I enjoy doing many things at one time, but", "I find it difficult to decide what to do first", "I tend to do things just because", "I think they\u2019d be fun", "When things are dull, I always try to introduce some excitement", "I tend to be fickle, changing my mood and thoughts frequently", "I tend to get overly excited about things", "My impulses tend to get me into a lot of trouble I tend to be theatrical and draw attention to myself", "I speak my mind no matter what the reaction of others may be", "I sometimes have fits of rage and then feel terribly guilty", "I often tell lies to get out of trouble", "I have always had less interest than the average person in sex", "I don\u2019t play by the rules anymore", "I have lost my friends", "I can\u2019t sustain romantic relationships", "I consider the law arbitrary and without reason", "I now consider rules that", "I used to follow ridiculous"]}, {"id": "4B", "label": "4B Serotonin Deficiency", "short": "Serotonin", "items": ["I am not very perceptive", "I can\u2019t remember things that", "I have seen in the past", "I have a slow reaction time", "I have a poor sense of direction", "I have night sweats", "I have insomnia", "I tend to sleep in many different positions in order to feel comfortable", "I always awake early in the morning", "I can\u2019t relax", "I wake up at least two times per night", "It is difficult for me to fall back asleep when I am awakened", "I crave salt", "I have less energy to exercise", "I am sad", "Personality I have chronic anxiety", "I am easily irritated", "I have thoughts of self-destruction", "I have had suicidal thoughts in my life", "I tend to dwell on ideas too much", "I am sometimes so structured that", "I become inflexible", "My imagination takes over", "Fear grips me", "I can\u2019t stop thinking about the meaning of life", "I no longer want to take risks", "The lack of meaning in my life is painful to me"]}], "deficiencyText": {"Dopamine": "Deficient dopamine Early warning signs are loss of energy, fatigue, sluggishness, memory loss, or the blues. Physical issues: Anemia, balance problems, blood sugar instability, bone density loss, carbohydrate cravings, decreased appetite, decreased strength, diabetes, diarrhea, anorgasmia, digestion problems, hypersomnia, head and facial tremors, high blood pressure, hyperglycemia, joint pain, kidney problems, light-headedness, low libido, narcolepsy, obesity, Parkinson\u2019s, slow metabolism, slow rigid movements, substance abuse, sugar cravings, tension, tremors, thyroid problems, swallowing problems. Personality Issues: Aggression, anger, carelessness, depression, fear of being observed, guilt, hopelessness, worthlessness, pleasure-seeking behavior, stress intolerance, social isolation, mood swings, procrastination, self-destructive thoughts. Memory Issues: Distractibility, lack of follow-through, forgetfulness, lack of working memory, poor abstract thinking, slow processing speed. Attention Issues: ADD, decreased alertness, failure to finish tasks, hyperactivity, impulsive behavior, poor concentration. Dopamine Boosters for Brain Energy Minor Deficit (0-5) Moderate Deficit (6-15) Major Deficit (15+) Phenylalanine 500 mg 1000 mg 1000-2000 mg Tyrosine 500 mg 1000 mg 1000-2000 mg Methionine 250 mg 500 mg 1000 mg Rhodiola 50 mg 100 mg 200 mg Pyroxidine 5 mg 10 mg 50 mg B complex 25 mg 50 mg 100 mg Phosphatidylserine 50 mg 100 mg 200 mg Ginko Biloba 50 mg 75 mg 100 mg Dietary modifications can boost dopamine as well. Increase your intake of phenylalanine and tyrosine (use Equal as a sugar substitute), eat chicken, cottage cheese, eggs, pork, ricotta cheese, soybean products, turkey, walnuts, wheat germ, granola, oats, duck, and milk and yogurt. To prevent dopamine burnout, practice deep breathing (from abdomen), alternating nostrils, watch non- violent movies and TV shows, weight lifting 3 times per week. Prevent exposure to lead and cadmium. Stop smoking. A cup or two of caffeine in the morning is a very common way to increase dopamine, however this can cause insomnia or tremors if dosage is too high or it is taken too late in the day. Deficient Acetylcholine Acetylcholine controls your brain speed and the rate at which electrical signals are processed, connecting your physical experiences to memories and thoughts. When your brain speed 9", "Acetylcholine": "slows with deficient acetylcholine, the brain does not have time to connect all the new stimuli to previously stored information, so it is discarded when the new information pours in. Your recall may become spotty, and you may not react to sensory stimuli as fast as before. This causes forgetfulness. Physical Issues: Agitation, Alzheimers, anxiety, arthritis, autism, high cholesterol, decreased sexual ability, diabetes, problems urinating, dry cough, dry mouth, dyslexia, frequent urination, eye disorders, fat cravings, frequent bowel movements, glaucoma, lack of arousal, inflammatory problems, multiple sclerosis, osteoporosis, reading/writing disorders, slowness of movement, speech problems Personality Issues Bipolar disorder, math errors, changes in personality and language, hysterical behavior, mood swings, rule breaking. Memory Issues: Learning disorders, loss of immediate visual and verbal memory, memory disturbance, memory lapses. Attention Issues: Attention problems, difficulty concentrating, diminished comprehension, impaired abstract thinking, impaired creativity. Acetylcholine Boosters Minor Deficit (0-5) Moderate Deficit (6-15) Major Deficit (15+) Choline (GPC choline) 100 mg 200 mg 500 mg Phosphatidylcholine 500 mg 1000 mg 2000 mg Phosphatidylserine 50 mg 100 mg 200 mg Acetyl-l-carnitine 250 mg 500 mg 1000 mg DHA 200 mg 500 mg 1000 mg (Docosahexaenoic acid) Thiamine 25 mg 50 mg 100 mg Pantothenic Acid 25 mg 50 mg 100 mg Vitamin B12 100 mcg 200 mcg 500 mcg Taurine 250 mcg 500 mcg 1000 mcg Huperzine-A 50 mcg 100 mcg 200 mcg Ginko Biloba 50 mg 75 mg 100 mg Korean Ginseng 100 mg 200 mg 500 mg", "GABA": "Deficient GABA Gaba is produced in the temporal lobes and is associated throughout the brain with calming, rhythmic theta waves \u2013 the \u201cidling frequency\u201d of neurons. GABA is the major inhibitory neurotransmitter of the brain, which keeps all of the other biochemicals in check. GABA controls the brains rhythm so that you function mentally and physically at a steady pace. When your rhythm is thrown off by a GABA deficiency, you may begin to feel anxious, nervous, or irritable. Without enough GABA, your brain produces energy in bursts, which impacts your emotional well-being. Physical Issues: Tremors, allergies, appetite changes, backache, blurred vision, carbohydrate cravings, chest pain, clammy hands, constipation, decreased libido, diarrhea, difficulty swallowing, dizziness, dry mouth, excessive sleepiness, headache, hypertension, hyperventilation, insomnia, irritable bowel syndrome, muscle loss, muscle tension, nausea, night sweats, parethesias, PMS, protein cravings, seizures, shortness of breath, stroke, heart palpitations, ringing in ears, trembling, twitching, urinary frequency. Personality Issues: Problems adjusting to stress, anxiety, depression, feelings of dread, excessive guilt, worthlessness, hopelessness, emotional immaturity, manic depression, obsessive compulsive disorder, phobias, rage, restlessness, thoughts of suicide, psychosis. Memory Issues: Poor verbal memory, global memory problems. Attention Issues: Difficulty concentrating, disorganized attention pattern associated with anxiety, high anxiety, impulsive attention errors (jumping the gun, erratic driving), inability to think clearly. 10", "Serotonin": "Serotonin Deficiency Serotonin is produced in great quantities in the occipital lobes and helps create the neurological electricity for sight and rest, and also controls your cravings. The occipital lobes maintain your brain\u2019s overall balance, or synchrony, by regulating the output of all the primary brain waves. The four brain waves appear in varying combinations throughout the day, but at night serotonin allows the brain to recharge and rebalance. If these brain waves are out of sync, the left and right sides of your brain will be out of balance, and you might feel like you are going off the edge; you are overtired, out of control, and unable to get a restful sleep. When serotonin is unbalanced, your brain\u2019s ability to recharge itself is compromised. Serotonin burnout can occur from experiencing too much excitement or not getting enough sleep. When this happens, you simply cannot think clearly. Physical Issues: Aches and soreness, allergies, arthritis, backache, blurred vision, carbohydrate cravings, clammy hands, constipation or diarrhea, difficulty swallowing, dizziness, drug or alcohol addiction, drug reactions, dry mouth, hallucinations, headaches, high pain/pleasure threshold, hypersensitivity, excessive sleeping, hypertension, insomnia, muscle tension, nausea, night sweats, palpitations, parethesias, PMS, premature ejaculation, premature orgasm for women, salt cravings, tachycardia, ringing in ears, tremors, urinary frequency, vomiting, weight gain. Personality Issues: Codependency, depersonalization, depression, impulsiveness, lack of artistic appreciation, lack of common sense, lack of pleasure, social isolation, masochistic tendencies, obsessive compulsive disorder, paranoia, perfectionism, phobias, rage, self-absorption, shyness. Memory Issues: Confusion, memory loss, too many ideas to manage. Attention Issues: Difficulty concentrating, hypervigilance, restlessness, slow reaction time."}, "boostersText": {"Dopamine": "Dopamine Boosters for Brain Energy Minor Deficit (0-5) Moderate Deficit (6-15) Major Deficit (15+) Phenylalanine 500 mg 1000 mg 1000-2000 mg Tyrosine 500 mg 1000 mg 1000-2000 mg Methionine 250 mg 500 mg 1000 mg Rhodiola 50 mg 100 mg 200 mg Pyroxidine 5 mg 10 mg 50 mg B complex 25 mg 50 mg 100 mg Phosphatidylserine 50 mg 100 mg 200 mg Ginko Biloba 50 mg 75 mg 100 mg Dietary modifications can boost dopamine as well. Increase your intake of phenylalanine and tyrosine (use Equal as a sugar substitute), eat chicken, cottage cheese, eggs, pork, ricotta cheese, soybean products, turkey, walnuts, wheat germ, granola, oats, duck, and milk and yogurt. To prevent dopamine burnout, practice deep breathing (from abdomen), alternating nostrils, watch non- violent movies and TV shows, weight lifting 3 times per week. Prevent exposure to lead and cadmium. Stop smoking. A cup or two of caffeine in the morning is a very common way to increase dopamine, however this can cause insomnia or tremors if dosage is too high or it is taken too late in the day. Deficient Acetylcholine Acetylcholine controls your brain speed and the rate at which electrical signals are processed, connecting your physical experiences to memories and thoughts. When your brain speed 9 slows with deficient acetylcholine, the brain does not have time to connect all the new stimuli to previously stored information, so it is discarded when the new information pours in. Your recall may become spotty, and you may not react to sensory stimuli as fast as before. This causes forgetfulness. Physical Issues: Agitation, Alzheimers, anxiety, arthritis, autism, high cholesterol, decreased sexual ability, diabetes, problems urinating, dry cough, dry mouth, dyslexia, frequent urination, eye disorders, fat cravings, frequent bowel movements, glaucoma, lack of arousal, inflammatory problems, multiple sclerosis, osteoporosis, reading/writing disorders, slowness of movement, speech problems Personality Issues Bipolar disorder, math errors, changes in personality and language, hysterical behavior, mood swings, rule breaking. Memory Issues: Learning disorders, loss of immediate visual and verbal memory, memory disturbance, memory lapses. Attention Issues: Attention problems, difficulty concentrating, diminished comprehension, impaired abstract thinking, impaired creativity.", "Acetylcholine": "Acetylcholine Boosters Minor Deficit (0-5) Moderate Deficit (6-15) Major Deficit (15+) Choline (GPC choline) 100 mg 200 mg 500 mg Phosphatidylcholine 500 mg 1000 mg 2000 mg Phosphatidylserine 50 mg 100 mg 200 mg Acetyl-l-carnitine 250 mg 500 mg 1000 mg DHA 200 mg 500 mg 1000 mg (Docosahexaenoic acid) Thiamine 25 mg 50 mg 100 mg Pantothenic Acid 25 mg 50 mg 100 mg Vitamin B12 100 mcg 200 mcg 500 mcg Taurine 250 mcg 500 mcg 1000 mcg Huperzine-A 50 mcg 100 mcg 200 mcg Ginko Biloba 50 mg 75 mg 100 mg Korean Ginseng 100 mg 200 mg 500 mg", "GABA": "GABA Boosters Minor Deficit (0-5) Moderate Deficit (5-15) Major Deficit (15+) Inositol 500 mg 1000 mg 2000 mg GABA (not well- 100 mg 500 mg 1000 mg absorbed) Glutamic Acid 250 mg 500 mg 1000 mg Melatonin (at night) 1 mg 2 mg 3-6 mg Thiamine 200 mg 400 mg 600 mg Niacinamide 25 mg 100 mg 500 mg Pyridoxine 5 mg 10 mg 50 mg Valerian root 100 mg 200 mg 500 mg Passionflower 200 mg 500 mg 1000 mg", "Serotonin": "Serotonin Boosters Minor Deficits (0-5) Moderate Deficits (6-15) Major Deficits (15+) Calcium 500 mg 750 mg 1000 mg Fish oil (pharmaceutical 500 mg 1000 mg 2000 mg grade) 5-HTP (with 100 mg 200 mg 400 mg decarboxylase inhibitor) Magnesium 200 mg 400 mg 600 mg Melatonin (at night) 1/3 mg \u00bd-2 mg 1-6 mg Passionflower 200 mg 500 mg 1000 mg Pyridoxine 5 mg 10 mg 50 mg SAM-e 50 mg 100 mg 200 mg St. John\u2019s Wort 200 mg 400 mg 600 mg Tryptophan (prescription)500 mg 1000 mg 1500-2000 mg Zinc 15 mg 30 mg 45 mg"}, "severityRules": {"default": {"minor": [0, 5], "moderate": [6, 15], "major": [15, null]}, "GABA": {"minor": [0, 5], "moderate": [5, 15], "major": [15, null]}}}};
-const STORAGE_KEY = DATA.meta.storageKey;
+const DATA = {"meta": {"title": "Braverman Personality Type Assessment", "storageKey": "braverman_assessment_v1"}, "part1": {"instructions": "Answer in terms of how you feel most of the time. Record the total number of true statements in each group.", "groups": [{"id": "1A", "label": "1A Dopamine Nature", "short": "Dopamine", "items": ["I find it easy to process my thoughts", "I concentrate effectively", "I am a deep thinker", "I am a quick thinker", "I become distracted because", "I do so many tasks at once", "I enjoy intense debate", "I have a good imagination", "I tend to criticize and analyze my thoughts", "I have a lot of energy most of the time", "My blood pressure is often elevated", "Sometimes in my life I have had episodes of extreme energy", "I have insomnia", "I find exercising invigorating", "I don’t ordinarily need coffee to jump- start me in the morning", "My veins are visible and tend to look as though they might pop out of my skin I tend to have a high body temperature", "I eat my lunch while I’m working", "I engage in sexual intercourse any chance", "I get", "I have a temper", "I eat only to reenergize my body", "I love action movies", "Exercising makes me feel powerful", "Personality I am a very domineering individual", "I sometimes don’t notice my feelings", "I often have trouble listening to others because my own ideas dominate", "I have been in many fights", "I tend to be future-oriented", "I am sometimes speculative", "Most people view me as thinking-oriented", "I daydream and often fantasize", "I like to read history and other non-fiction books", "I admire ingenuity", "I can be slow in identifying how people can cause trouble", "onality Type Assessment ature her for True or for False. At the end of each group, n the space provided. ost of the time. For example, if you’ve had a bad night’s that pertain to your energy levels based on how you feel I don’t usually get tricked by people who say they need my help", "Most people view me as innovative", "People have thought I have had some strange ideas, but I can always explain the basis for them rationally", "I am often agitated or irritated", "Little things make me anxious or upset", "I have fantasies of unlimited power", "I love spending money", "I dominate others in relationships", "I am very hard on myself", "I react aggressively to criticism, often becoming defensive in front of others", "Some individuals view me as tough- minded", "Most people view me as achievement- oriented", "Some people say that I am irrational", "I will do anything to reach a goal", "I value a religious philosophy", "Incompetence makes me angry", "I have high standards for myself and for others"]}, {"id": "2A", "label": "2A Acetylcholine Nature", "short": "Acetylcholine", "items": ["F F My memory is very strong", "F I am an excellent listener", "F I am good at remembering stories", "F I usually do not forget a face", "F I am very creative", "F I have an excellent attention span and rarely miss a thing", "F I have many good hunches", "F I notice everything going on around me", "I have a good imagination", "F I tend to have a slow pulse", "My body has excellent tone", "I have a great figure/build", "I have really low cholesterol", "When I eat, I love to experience the aromas and the beauty of food", "I love yoga and stretching my muscles", "During sex, I am very sensual", "I have had an eating disorder at some point in my life", "I have tried many alternative remedies", "Personality I am a perpetual romantic", "I am in touch with my feelings", "I tend to make decisions based on hunches", "I like to speculate", "Some people say I have my head in the clouds", "I love reading fiction", "I have a rich fantasy life", "I am creative when solving people problems", "I am very expressive; I like to talk about what’s bothering me", "I am buoyant", "I believe that it is possible to have a mystical experience", "I believe in being a soul mate", "Sometimes the mystical can excite me", "I tend to overreact to my body", "I find it easy to change things; I am not set in my ways", "I am deeply in touch with my emotions", "I tend to love someone one minute and hate him or her the next", "I am flirtatious", "I don’t mind spending money if it benefits my relationships", "I tend to fantasize when I’m having sex", "My relationships tend to be filled with romance", "I love watching romantic movies", "I take risks in my love life", "I foresee a better future", "I am inspired to help other people", "I believe that all things are possible, particularly for those who are devoted", "I am good at creating harmony between people", "Charity and altruism come from the heart, and I have plenty of both", "Others think me of as having vision", "F My thoughts on religion often change", "F I am an idealist, but not a perfectionist", "F I’m happy with someone who just F treats me right"]}, {"id": "3A", "label": "3A GABA Nature", "short": "GABA", "items": ["F F I have a stable attention span and can follow other people’s logic", "F I enjoy reading people more than books", "F I retain most of what I hear", "I can remember facts people tell me", "F I learn from my experiences", "F I am good at remembering names", "I can focus very well on tasks and F people’s stories", "F F I find it easy to relax", "I am a calm person", "F I find it easy to fall asleep at night", "I tend to have high physical endurance", "F I have low blood pressure", "F I do not have a family history of stroke", "When it comes to sex, I am not very F experimental", "F I have little muscle tension", "F Caffeine has little effect on me", "F I take my time eating my meals", "I sleep well", "F I don’t have many harmful food cravings F such as sugar", "Exercising is a regimented habit for me", "F Personality F I am not very adventurous", "I do not have a temper", "F I have a lot of patience", "F I don’t enjoy philosophy", "I love watching sitcoms about families", "F I dislike movies about other worlds F or universes", "F I am not a risk-taker", "I keep past experiences in mind before I F make decisions", "F I am a realistic person", "I believe in closure", "I like facts and details", "F When I make a decision, it’s permanent", "I like to plan my day, week, month, etc.", "F I collect things", "I am a little sad", "F I am afraid of confrontations and altercations", "I save up a lot of money in the event of a crisis T I tend to create strong, lasting bonds with others", "I am a stable pillar in people’s lives", "I believe in the adage “Early to bed, early to rise.”", "I believe in meeting deadlines", "I try to please others the best I can T I am a perfectionist", "I am good at maintaining long-lasting relationships", "I pay attention to where my money goes", "I believe that the world would be more peaceful if people would improve upon their morals", "I am very loyal and devoted to my loved ones T I have high ethical standards that I live by", "I pay close attention to laws, principles, and policies", "I believe in participating in service for the community"]}, {"id": "4A", "label": "4A Serotonin Nature", "short": "Serotonin", "items": ["I can easily concentrate on manual-labor tasks", "I have a good visual memory", "I am very perceptive", "I am an impulsive thinker", "I live in the here and now", "I tend to say, “Tell me the bottom line.”", "I am a slow book learner, but I learn easily from experience", "I need to experience something or work at it hands-on in order to understand it", "I sleep too much", "When it comes to sex, I am very experimental", "I have low blood pressure", "I am very action-oriented", "I am very handy around the house", "I am very active outdoors", "I engage in daring activities such as skydiving and motorcycle riding", "I can solve problems spontaneously", "I rarely have carbohydrate cravings", "I usually grab a quick meal on the run", "F I’m usually not very consistent with my exercise routine; I may exercise F daily for three weeks and then skip it for a month", "F Personality F I live life in the immediate moment", "I like to perform/entertain in public", "I tend to gather facts in an unorganized F manner", "F I am very flexible", "F I am a great negotiator", "F I often just like to “eat, drink, and be merry”", "F I am dramatic", "F I am very artistic", "I am a good craftsman", "I’m a risk taker when it comes to sports", "F I believe in psychics", "I can easily take advantage of others", "F I am cynical of others’ philosophies", "F I like to have fun", "My favorite type of movies are horror F flicks", "I am fascinated with weapons", "F I rarely stick to a plan or agenda", "I have trouble remaining faithful", "I am easily able to separate and move on when relationships with loved ones end", "I don’t pay much attention to how I spend my money", "I have many frivolous relationships", "F F I always keep my options open in case F something better comes up", "F I don’t like working hard for long periods F of time", "F I believe things should have a function and purpose", "F I am optimistic", "I live in the moment", "F I pray only when I’m in need of spiritual support", "F I don’t have particularly high morals and ethical values", "F I do what I want, when I want to", "F I don’t care about being perfect; I just F live my life", "F Savings are for suckers"]}], "descriptions": {"Dopamine": "DOPAMINE NATURE If you have a dopamine nature, you are part of 17% of the population. When you are balanced, you are likely to be strong-willed who knows exactly what you want and how to get it. You are fast on your feet and self-confident. You are highly rational, more comfortable with facts and figures than with feelings and emotions. You are able to assess yourself critically, but you may not respond well to the criticisms of others. You focus intently on the task at hand and take pride in achievement. Strategic thinking, masterminding, inventing, problem solving, envisioning, and pragmatism are exciting and you function well under stress. A majority of doctors, scientists, researchers, inventors, engineers, generals and architects are dopamine dominant, but this does not preclude you from other professions. You may like to play chess, listen to books on tape, or do difficult crossword puzzles. You are tireless, perhaps overly alert, and may need less sleep than others. When exercising, you may enjoy weight-lifting more than aerobic activities. You may not be overly sensitive and miss it when others consider their feelings more important than your reasons. You may be distant from your children, and the stability of your marriage may depend on the loyalty and goodwill of your spouse. Excessive dopamine Too much dopamine can lead to excessive risk-taking behaviors and impulsive actions. Violence and over-control of others may be recurrent problems. Sexual activity level might be too high for sustained relationships to endure, as extramarital sexual activity may result. As teenagers, reckless driving, shoplifting, or date rape may result if you did not learn to balance your dopamine extremes in time.", "Acetylcholine": "ACETYLCHOLINE NATURE You are adept at working with your senses and view the world in sensory terms. You are highly creative and open to new ideas. You are a quick thinker who is always taking other people into consideration. You are devoted to making things the best they can be, no matter how much effort it requires. You are flexible, creative, and spontaneous, and are willing to try anything new as long as it promises to be new and exciting. If your acetylcholine nature is in balance, you are intuitive and innovative. You take pleasure in anything involving words, ideas, and communication. (Acetylcholine is produced to a great extent in the parietal lobes of the brain, which is responsible for language, intelligence, and comprehension) You may be ideal in the roles as counselor, mediator, think tank member, yoga and meditation instructor, religious leader, and in public service. Strong acetylcholine levels are associated with high brain speed, which impacts the creative function, so artists, writers, advertising professionals, and actors are frequently acetylcholine dominant. You are extremely social, even charismatic. You love meeting and greeting and making new friends. You come across to others as authentic and grounded. People find you charming, and you find relationships come easy to you. You invest a great deal of energy and time into your relationships and feel that you are personally reaping the rewards. You are an optimist, and your see the possibilities in people. You are attentive to the needs of children and romantic with you significant other. You are good at remembering other people’s feelings and reactions, and this enables you to not hurt others. You are altruistic and benevolent. You love adventure. You are open to new things and not afraid of failure. You like to travel, but you can also enjoy reading about the lives of others. Your quest for learning makes you interested in a variety of topics and adept at sharing your knowledge with others. 4 Too Much Acetylcholine You may give too much of yourself, to the point of not considering your own needs or becoming masochistic. You may feel the world is taking advantage of you, or become paranoid. You may become socially isolated as a result. Panic disorder, manic episodes, or anxiety can result.", "GABA": "GABA NATURE A person with a GABA nature is stable. Almost 50% of the world share this nature, whose hallmarks are consistency, sociability, and concern for others. If you have a GABA nature, you will likely show up every day for work and be there when others need you. When your GABA is in balance, you remain calm when chaos swirls around you. Characteristics of objectivity, levelheadedness, punctuality, practicality, and confidence all come naturally to you. Staying organized is very important to you, and rigid schedules are comforting rather than confining – they eliminate uncertainty and ensure smooth sailing. GABA dominant people tend to gravitate to careers as administrators, accountants, security officers, nurses, medical technicians, air-traffic controllers, news reporters, EMT’s, meeting planners, bus drivers, and homemakers. No matter what the job, the GABA-natured person is the one who tethers the group, who stays focused on the matter at hand, yet usually defers to the majority. You are the consummate team player, deriving pleasure from fulfilling your obligations and taking care of those you love. You are sensible, settled, and not prone to wide swings of emotion or outbursts of anger. You both relish group activities and cherish one-to-one connections. Making others comfortable makes you happy. Marriage is seen as a long-term haven. You probably believe in traditions and institutions, and enjoy your part in making them work, especially at your place of worship. You look forward to holiday gatherings, and planning for them seems more like play than work. You probably like history books and biographies. Collecting memorabilia and creating scrapbooks may provide hours of entertainment. There are times when you feel you’ve had a strong nurturing effect on others, such as after hosting a holiday dinner. EXCESS GABA Producing too much GABA may ratchet up your nurturing tendencies to the point where you ignore your own needs or end up getting hurt. You may spend too much energy looking for love, and then relying too heavily on you mates. You may look too much to authority figures for advice and continuously craving and following the advice of others.", "Serotonin": "SEROTONIN NATURE Serotonin resynchronizes your brain while you sleep so you wake every morning with a fresh start. If you have a serotonin nature, you are among 17% of the population who really know how to enjoy themselves. Serotonin is associated with delta waves (which are produced in abundance when we sleep) and affects our ability to rest, regenerate, and find security. If you have a serotonin nature, you know how to live in the moment. You are a realist, keenly responsive to sensory input, yet you can be impulsive, too. You love to participate in activities for the “love of the game” and not as a means to an end. Achievement to you means getting something done now. You thrive on change – you’ll alternate tasks and find new ways of doing repetitive ones. You will try new foods, pick up a new hobby, and plan a different vacation every year. When balanced, a person with a serotonin nature is receptive to stimuli, in touch with both mind and body, often physically coordinated, and very resourceful. You are not put off by struggle and undeterred by setbacks. If your work doesn’t feel like play, it is not worth doing. Your serotonin nature is ideal for professions requiring motor skills, hand-eye coordination, flexibility, and crisis management. Tools are extensions of the serotonin brain. Construction workers, oil riggers, truck and ambulance drivers, military personnel, hairstylists, bartenders, pilots, and computer programmers – who get to play with the most advanced and expensive tools – are all likely to have a serotonin nature. Professional athletes, movie stars, photographers, and fashion models might also have serotonin natures. Serotonin dominance would also be essential for trouble-shooting business executives hired to save floundering companies; for surgeons, orthopedists, and chiropractors; for detectives and investigators; and 5 for specialists in crisis intervention. If there is excitement anywhere, you will find it, whether it be parties, celebrations, video games, casino gambling, mountain climbing, hunting, skydiving, hang-gliding, skiing, or scuba diving. You are passionate in your relationships, but refuse to be tied down. It is important that those close to you recognize your need for freedom. You can be the life of the party; you can be cheerful, optimistic, and easygoing. You want everyone to join in and be part of your fun. You may have a special fondness for children, although you may be overwhelmed by the commitment needed to care for them. You delight in playing with them, and the roles of a favorite aunt, uncle or grandparent appeal the most to you. You are intensely loyal to coworkers, friends, and family. People appreciate your practical side and the way you make the best of any situation. You have many and varied friendships, but they may be more broad than deep. Your impulsivity and desire for new experiences may move you away before deeper roots are formed. You disdain order and routine, and with your love for independence, this can put a strain on your closest relationships. When you are maximizing your serotonin mature, you experience serenity throughout the day. You experience highs doing what others consider dangerous, such as bungee jumping, motorboat racing, whitewater rafting, motorcycling, or just staying out all night carousing. When you play hard, your body is in serotonin overdrive, and you are having the time of your life. TOO MUCH SEROTONIN Producing too much serotonin can make you extremely nervous. You can become hesitant, distracted, vulnerable to any manner of criticism, and morbidly afraid of being disliked. In the extreme, someone with an excessive serotonin personality is painfully shy and sees himself as inadequate and inferior. Such people are plagued by sadness, anger, and a desperate desire for interpersonal interaction, which, ironically, they are too fearful to attempt. 6"}}, "part2": {"instructions": "Answer in terms of how you feel right now. It doesn’t matter how long you’ve had the symptoms.", "groups": [{"id": "1B", "label": "1B Dopamine Deficiency", "short": "Dopamine", "items": ["I have trouble paying consistent attention and concentrating", "I need caffeine to wake up", "I cannot think quickly enough", "I do not have a good attention span", "I have trouble getting through a task even when it is interesting to me", "I am slow in learning new ideas", "I crave sugar", "I have decreased libido", "I sleep too much", "I have a history of alcohol or addiction", "I have recently felt worn out for no apparent reason", "I sometimes experience total exhaustion without even exerting myself", "I have always battled weight problems", "I have little motivation for sexual", "experiences", "I have little trouble getting out of bed in the morning", "I have had a craving for cocaine, amphetamines, or Ecstasy", "Personality I feel fine just following others", "People seem to take advantage of me", "I am feeling very down or depressed", "People have told me I am too mellow", "I have little urgency", "I let people criticize me", "I always look to others to lead me", "I have lost my reasoning skills", "I can’t make good decisions"]}, {"id": "2B", "label": "2B Acetylcholine Deficiency", "short": "Acetylcholine", "items": ["I lack imagination", "I have difficulty remembering names when", "I first meet people", "I have noticed that my memory ability is decreasing", "My significant other tells me I don’t have romantic thoughts", "I can’t remember my friend’s birthday", "I have lost some of my creativity", "I have insomnia", "I have lost muscle tone", "I don’t exercise anymore", "I crave fatty food", "I have experimented with hallucinogens or other illicit drugs", "I feel like my body is falling apart", "I can’t breathe easily", "Personality I don’t feel joy very often", "I feel despair", "I protect myself from being hurt by others by never telling much about myself", "I find it more comfortable to do things alone rather than in a large group", "people get angrier about bothersome things than I do", "I give in easily and tend to be submissive", "I rarely feel passionate about anything", "I like routine", "I don’t care about anyone’s stories but my own", "I don’t pay attention to people’s feelings", "I don’t feel buoyant", "I’m obsessed with my deficiencies"]}, {"id": "3B", "label": "3B GABA Deficiency", "short": "GABA", "items": ["I find it difficult to concentrate because I’m nervous and jumpy", "I can’t remember phone numbers", "I have trouble finding the right word", "I have trouble remembering things when", "I am put on the spot", "I know", "I am intelligent, but it is hard to show others", "My ability to focus comes and goes", "When I read, I find I have to go back over the same paragraph a few times to absorb the information", "I am a quick thinker but can’t always say what", "I mean", "I feel shaky", "I sometimes tremble", "I have frequent backaches and/or headaches", "I tend to have shortness of breath", "I tend to have heart palpitations", "I tend to have cold hands", "I sometimes sweat too much", "I am sometimes dizzy", "I often have muscle tension", "I tend to get butterflies in my stomach", "I crave bitter foods", "I am often nervous", "I like yoga because it helps me to relax", "I often feel fatigued even when", "I have had a good night’s sleep", "I overeat", "Personality I have mood swings", "I enjoy doing many things at one time, but", "I find it difficult to decide what to do first", "I tend to do things just because", "I think they’d be fun", "When things are dull, I always try to introduce some excitement", "I tend to be fickle, changing my mood and thoughts frequently", "I tend to get overly excited about things", "My impulses tend to get me into a lot of trouble I tend to be theatrical and draw attention to myself", "I speak my mind no matter what the reaction of others may be", "I sometimes have fits of rage and then feel terribly guilty", "I often tell lies to get out of trouble", "I have always had less interest than the average person in sex", "I don’t play by the rules anymore", "I have lost my friends", "I can’t sustain romantic relationships", "I consider the law arbitrary and without reason", "I now consider rules that", "I used to follow ridiculous"]}, {"id": "4B", "label": "4B Serotonin Deficiency", "short": "Serotonin", "items": ["I am not very perceptive", "I can’t remember things that", "I have seen in the past", "I have a slow reaction time", "I have a poor sense of direction", "I have night sweats", "I have insomnia", "I tend to sleep in many different positions in order to feel comfortable", "I always awake early in the morning", "I can’t relax", "I wake up at least two times per night", "It is difficult for me to fall back asleep when I am awakened", "I crave salt", "I have less energy to exercise", "I am sad", "Personality I have chronic anxiety", "I am easily irritated", "I have thoughts of self-destruction", "I have had suicidal thoughts in my life", "I tend to dwell on ideas too much", "I am sometimes so structured that", "I become inflexible", "My imagination takes over", "Fear grips me", "I can’t stop thinking about the meaning of life", "I no longer want to take risks", "The lack of meaning in my life is painful to me"]}], "deficiencyText": {"Dopamine": "Deficient dopamine Early warning signs are loss of energy, fatigue, sluggishness, memory loss, or the blues. Physical issues: Anemia, balance problems, blood sugar instability, bone density loss, carbohydrate cravings, decreased appetite, decreased strength, diabetes, diarrhea, anorgasmia, digestion problems, hypersomnia, head and facial tremors, high blood pressure, hyperglycemia, joint pain, kidney problems, light-headedness, low libido, narcolepsy, obesity, Parkinson’s, slow metabolism, slow rigid movements, substance abuse, sugar cravings, tension, tremors, thyroid problems, swallowing problems. Personality Issues: Aggression, anger, carelessness, depression, fear of being observed, guilt, hopelessness, worthlessness, pleasure-seeking behavior, stress intolerance, social isolation, mood swings, procrastination, self-destructive thoughts. Memory Issues: Distractibility, lack of follow-through, forgetfulness, lack of working memory, poor abstract thinking, slow processing speed. Attention Issues: ADD, decreased alertness, failure to finish tasks, hyperactivity, impulsive behavior, poor concentration. Dopamine Boosters for Brain Energy Minor Deficit (0-5) Moderate Deficit (6-15) Major Deficit (15+) Phenylalanine 500 mg 1000 mg 1000-2000 mg Tyrosine 500 mg 1000 mg 1000-2000 mg Methionine 250 mg 500 mg 1000 mg Rhodiola 50 mg 100 mg 200 mg Pyroxidine 5 mg 10 mg 50 mg B complex 25 mg 50 mg 100 mg Phosphatidylserine 50 mg 100 mg 200 mg Ginko Biloba 50 mg 75 mg 100 mg Dietary modifications can boost dopamine as well. Increase your intake of phenylalanine and tyrosine (use Equal as a sugar substitute), eat chicken, cottage cheese, eggs, pork, ricotta cheese, soybean products, turkey, walnuts, wheat germ, granola, oats, duck, and milk and yogurt. To prevent dopamine burnout, practice deep breathing (from abdomen), alternating nostrils, watch non- violent movies and TV shows, weight lifting 3 times per week. Prevent exposure to lead and cadmium. Stop smoking. A cup or two of caffeine in the morning is a very common way to increase dopamine, however this can cause insomnia or tremors if dosage is too high or it is taken too late in the day. Deficient Acetylcholine Acetylcholine controls your brain speed and the rate at which electrical signals are processed, connecting your physical experiences to memories and thoughts. When your brain speed 9", "Acetylcholine": "slows with deficient acetylcholine, the brain does not have time to connect all the new stimuli to previously stored information, so it is discarded when the new information pours in. Your recall may become spotty, and you may not react to sensory stimuli as fast as before. This causes forgetfulness. Physical Issues: Agitation, Alzheimers, anxiety, arthritis, autism, high cholesterol, decreased sexual ability, diabetes, problems urinating, dry cough, dry mouth, dyslexia, frequent urination, eye disorders, fat cravings, frequent bowel movements, glaucoma, lack of arousal, inflammatory problems, multiple sclerosis, osteoporosis, reading/writing disorders, slowness of movement, speech problems Personality Issues Bipolar disorder, math errors, changes in personality and language, hysterical behavior, mood swings, rule breaking. Memory Issues: Learning disorders, loss of immediate visual and verbal memory, memory disturbance, memory lapses. Attention Issues: Attention problems, difficulty concentrating, diminished comprehension, impaired abstract thinking, impaired creativity. Acetylcholine Boosters Minor Deficit (0-5) Moderate Deficit (6-15) Major Deficit (15+) Choline (GPC choline) 100 mg 200 mg 500 mg Phosphatidylcholine 500 mg 1000 mg 2000 mg Phosphatidylserine 50 mg 100 mg 200 mg Acetyl-l-carnitine 250 mg 500 mg 1000 mg DHA 200 mg 500 mg 1000 mg (Docosahexaenoic acid) Thiamine 25 mg 50 mg 100 mg Pantothenic Acid 25 mg 50 mg 100 mg Vitamin B12 100 mcg 200 mcg 500 mcg Taurine 250 mcg 500 mcg 1000 mcg Huperzine-A 50 mcg 100 mcg 200 mcg Ginko Biloba 50 mg 75 mg 100 mg Korean Ginseng 100 mg 200 mg 500 mg", "GABA": "Deficient GABA Gaba is produced in the temporal lobes and is associated throughout the brain with calming, rhythmic theta waves – the “idling frequency” of neurons. GABA is the major inhibitory neurotransmitter of the brain, which keeps all of the other biochemicals in check. GABA controls the brains rhythm so that you function mentally and physically at a steady pace. When your rhythm is thrown off by a GABA deficiency, you may begin to feel anxious, nervous, or irritable. Without enough GABA, your brain produces energy in bursts, which impacts your emotional well-being. Physical Issues: Tremors, allergies, appetite changes, backache, blurred vision, carbohydrate cravings, chest pain, clammy hands, constipation, decreased libido, diarrhea, difficulty swallowing, dizziness, dry mouth, excessive sleepiness, headache, hypertension, hyperventilation, insomnia, irritable bowel syndrome, muscle loss, muscle tension, nausea, night sweats, parethesias, PMS, protein cravings, seizures, shortness of breath, stroke, heart palpitations, ringing in ears, trembling, twitching, urinary frequency. Personality Issues: Problems adjusting to stress, anxiety, depression, feelings of dread, excessive guilt, worthlessness, hopelessness, emotional immaturity, manic depression, obsessive compulsive disorder, phobias, rage, restlessness, thoughts of suicide, psychosis. Memory Issues: Poor verbal memory, global memory problems. Attention Issues: Difficulty concentrating, disorganized attention pattern associated with anxiety, high anxiety, impulsive attention errors (jumping the gun, erratic driving), inability to think clearly. 10", "Serotonin": "Serotonin Deficiency Serotonin is produced in great quantities in the occipital lobes and helps create the neurological electricity for sight and rest, and also controls your cravings. The occipital lobes maintain your brain’s overall balance, or synchrony, by regulating the output of all the primary brain waves. The four brain waves appear in varying combinations throughout the day, but at night serotonin allows the brain to recharge and rebalance. If these brain waves are out of sync, the left and right sides of your brain will be out of balance, and you might feel like you are going off the edge; you are overtired, out of control, and unable to get a restful sleep. When serotonin is unbalanced, your brain’s ability to recharge itself is compromised. Serotonin burnout can occur from experiencing too much excitement or not getting enough sleep. When this happens, you simply cannot think clearly. Physical Issues: Aches and soreness, allergies, arthritis, backache, blurred vision, carbohydrate cravings, clammy hands, constipation or diarrhea, difficulty swallowing, dizziness, drug or alcohol addiction, drug reactions, dry mouth, hallucinations, headaches, high pain/pleasure threshold, hypersensitivity, excessive sleeping, hypertension, insomnia, muscle tension, nausea, night sweats, palpitations, parethesias, PMS, premature ejaculation, premature orgasm for women, salt cravings, tachycardia, ringing in ears, tremors, urinary frequency, vomiting, weight gain. Personality Issues: Codependency, depersonalization, depression, impulsiveness, lack of artistic appreciation, lack of common sense, lack of pleasure, social isolation, masochistic tendencies, obsessive compulsive disorder, paranoia, perfectionism, phobias, rage, self-absorption, shyness. Memory Issues: Confusion, memory loss, too many ideas to manage. Attention Issues: Difficulty concentrating, hypervigilance, restlessness, slow reaction time."}, "boostersText": {"Dopamine": "Dopamine Boosters for Brain Energy Minor Deficit (0-5) Moderate Deficit (6-15) Major Deficit (15+) Phenylalanine 500 mg 1000 mg 1000-2000 mg Tyrosine 500 mg 1000 mg 1000-2000 mg Methionine 250 mg 500 mg 1000 mg Rhodiola 50 mg 100 mg 200 mg Pyroxidine 5 mg 10 mg 50 mg B complex 25 mg 50 mg 100 mg Phosphatidylserine 50 mg 100 mg 200 mg Ginko Biloba 50 mg 75 mg 100 mg Dietary modifications can boost dopamine as well. Increase your intake of phenylalanine and tyrosine (use Equal as a sugar substitute), eat chicken, cottage cheese, eggs, pork, ricotta cheese, soybean products, turkey, walnuts, wheat germ, granola, oats, duck, and milk and yogurt. To prevent dopamine burnout, practice deep breathing (from abdomen), alternating nostrils, watch non- violent movies and TV shows, weight lifting 3 times per week. Prevent exposure to lead and cadmium. Stop smoking. A cup or two of caffeine in the morning is a very common way to increase dopamine, however this can cause insomnia or tremors if dosage is too high or it is taken too late in the day. Deficient Acetylcholine Acetylcholine controls your brain speed and the rate at which electrical signals are processed, connecting your physical experiences to memories and thoughts. When your brain speed 9 slows with deficient acetylcholine, the brain does not have time to connect all the new stimuli to previously stored information, so it is discarded when the new information pours in. Your recall may become spotty, and you may not react to sensory stimuli as fast as before. This causes forgetfulness. Physical Issues: Agitation, Alzheimers, anxiety, arthritis, autism, high cholesterol, decreased sexual ability, diabetes, problems urinating, dry cough, dry mouth, dyslexia, frequent urination, eye disorders, fat cravings, frequent bowel movements, glaucoma, lack of arousal, inflammatory problems, multiple sclerosis, osteoporosis, reading/writing disorders, slowness of movement, speech problems Personality Issues Bipolar disorder, math errors, changes in personality and language, hysterical behavior, mood swings, rule breaking. Memory Issues: Learning disorders, loss of immediate visual and verbal memory, memory disturbance, memory lapses. Attention Issues: Attention problems, difficulty concentrating, diminished comprehension, impaired abstract thinking, impaired creativity.", "Acetylcholine": "Acetylcholine Boosters Minor Deficit (0-5) Moderate Deficit (6-15) Major Deficit (15+) Choline (GPC choline) 100 mg 200 mg 500 mg Phosphatidylcholine 500 mg 1000 mg 2000 mg Phosphatidylserine 50 mg 100 mg 200 mg Acetyl-l-carnitine 250 mg 500 mg 1000 mg DHA 200 mg 500 mg 1000 mg (Docosahexaenoic acid) Thiamine 25 mg 50 mg 100 mg Pantothenic Acid 25 mg 50 mg 100 mg Vitamin B12 100 mcg 200 mcg 500 mcg Taurine 250 mcg 500 mcg 1000 mcg Huperzine-A 50 mcg 100 mcg 200 mcg Ginko Biloba 50 mg 75 mg 100 mg Korean Ginseng 100 mg 200 mg 500 mg", "GABA": "GABA Boosters Minor Deficit (0-5) Moderate Deficit (5-15) Major Deficit (15+) Inositol 500 mg 1000 mg 2000 mg GABA (not well- 100 mg 500 mg 1000 mg absorbed) Glutamic Acid 250 mg 500 mg 1000 mg Melatonin (at night) 1 mg 2 mg 3-6 mg Thiamine 200 mg 400 mg 600 mg Niacinamide 25 mg 100 mg 500 mg Pyridoxine 5 mg 10 mg 50 mg Valerian root 100 mg 200 mg 500 mg Passionflower 200 mg 500 mg 1000 mg", "Serotonin": "Serotonin Boosters Minor Deficits (0-5) Moderate Deficits (6-15) Major Deficits (15+) Calcium 500 mg 750 mg 1000 mg Fish oil (pharmaceutical 500 mg 1000 mg 2000 mg grade) 5-HTP (with 100 mg 200 mg 400 mg decarboxylase inhibitor) Magnesium 200 mg 400 mg 600 mg Melatonin (at night) 1/3 mg ½-2 mg 1-6 mg Passionflower 200 mg 500 mg 1000 mg Pyridoxine 5 mg 10 mg 50 mg SAM-e 50 mg 100 mg 200 mg St. John’s Wort 200 mg 400 mg 600 mg Tryptophan (prescription)500 mg 1000 mg 1500-2000 mg Zinc 15 mg 30 mg 45 mg"}, "severityRules": {"default": {"minor": [0, 5], "moderate": [6, 15], "major": [15, null]}, "GABA": {"minor": [0, 5], "moderate": [5, 15], "major": [15, null]}}}};
 
-function loadState() {{
-  try {{
+const STORAGE_KEY = DATA.meta.storageKey || "braverman_assessment";
+const STATE = {
+  tab: "part1",
+  answers: {} // key -> 'u' | 'f' | 't'
+};
+
+function saveState(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+  setSavedIndicator(true);
+}
+function loadState(){
+  try{
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return {{}};
-    return JSON.parse(raw) || {{}};
-  }} catch (e) {{
-    return {{}};
-  }}
-}}
+    if(!raw) return;
+    const parsed = JSON.parse(raw);
+    if(parsed && typeof parsed === "object"){
+      STATE.tab = parsed.tab || STATE.tab;
+      STATE.answers = parsed.answers || {};
+    }
+  }catch(e){}
+}
+function resetAll(){
+  STATE.answers = {};
+  saveState();
+  renderAll();
+}
 
-function saveState(state) {{
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  document.getElementById('savedBadge').textContent = 'Saved';
-}}
+function setSavedIndicator(on){
+  const el = document.getElementById("savedFlag");
+  if(!el) return;
+  el.textContent = on ? "Saved" : "";
+}
+let savedTimer=null;
+function flashSaved(){
+  setSavedIndicator(true);
+  if(savedTimer) clearTimeout(savedTimer);
+  savedTimer=setTimeout(()=>setSavedIndicator(false), 1200);
+}
 
-function defaultAnswerState() {{
-  const state = {{}};
-  for (const part of ['part1','part2']) {{
-    for (const g of DATA[part].groups) {{
-      state[g.id] = state[g.id] || [];
-      for (let i=0; i<g.items.length; i++) {{
-        if (state[g.id][i] === undefined) state[g.id][i] = null;
-      }}
-    }}
-  }}
-  return state;
-}}
+function keyFor(part, groupId, idx){
+  return `${part}:${groupId}:${idx}`;
+}
 
-let appState = defaultAnswerState();
-Object.assign(appState, loadState());
-appState = defaultAnswerState();
-saveState(appState);
+function getGroups(part){
+  return part === "part1" ? DATA.part1.groups : DATA.part2.groups;
+}
 
-function setTab(activeId) {{
-  const tabs = [
-    ['tab-part1','panel-part1'],
-    ['tab-part2','panel-part2'],
-    ['tab-results','panel-results'],
-  ];
-  for (const [tabId,panelId] of tabs) {{
-    const tab = document.getElementById(tabId);
-    const panel = document.getElementById(panelId);
-    const active = (tabId === activeId);
-    tab.setAttribute('aria-selected', active ? 'true':'false');
-    panel.hidden = !active;
-  }}
-  if (activeId === 'tab-results') renderResults();
-}}
+function countAllQuestions(){
+  let total=0;
+  for(const part of ["part1","part2"]){
+    for(const g of getGroups(part)){
+      total += (g.items||[]).length;
+    }
+  }
+  return total;
+}
 
-document.getElementById('tab-part1').addEventListener('click', ()=>setTab('tab-part1'));
-document.getElementById('tab-part2').addEventListener('click', ()=>setTab('tab-part2'));
-document.getElementById('tab-results').addEventListener('click', ()=>setTab('tab-results'));
-document.getElementById('jumpResults').addEventListener('click', ()=>setTab('tab-results'));
+function progress(){
+  const total = countAllQuestions();
+  let answered=0;
+  for(const k in STATE.answers){
+    if(STATE.answers[k] && STATE.answers[k] !== "u") answered++;
+  }
+  return {answered, total};
+}
 
-function triControl(groupId, index) {{
-  const wrap = document.createElement('div');
-  wrap.className = 'tri';
-  const states = [
-    {{ key:'u', label:'Unanswered', value:null }},
-    {{ key:'f', label:'False', value:false }},
-    {{ key:'t', label:'True', value:true }},
-  ];
-  for (const s of states) {{
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.dataset.state = s.key;
-    btn.textContent = s.label;
-    btn.setAttribute('aria-pressed', (appState[groupId][index] === s.value) ? 'true':'false');
-    btn.addEventListener('click', ()=> {{
-      appState[groupId][index] = s.value;
-      saveState(appState);
-      for (const b of wrap.querySelectorAll('button')) {{
-        const k = b.dataset.state;
-        const v = (k==='u')?null:(k==='f')?false:true;
-        b.setAttribute('aria-pressed', (appState[groupId][index] === v) ? 'true':'false');
-      }}
-      updateAllBadges();
-    }});
-    wrap.appendChild(btn);
-  }}
-  return wrap;
-}}
+function scoreGroup(part, group){
+  let s=0;
+  (group.items||[]).forEach((_, idx)=>{
+    const k=keyFor(part, group.id, idx);
+    if(STATE.answers[k]==="t") s++;
+  });
+  return s;
+}
 
-function openOverlay(title, body, style) {{
-  const overlay = document.getElementById('overlay');
-  overlay.style.display='block';
-  if (style === 'modal') {{
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('modalBody').textContent = body;
-    document.getElementById('modal').style.display='block';
-  }} else {{
-    document.getElementById('sheetTitle').textContent = title;
-    document.getElementById('sheetBody').textContent = body;
-    document.getElementById('sheet').style.display='block';
-  }}
-}}
+function scoresForPart(part){
+  const out = [];
+  for(const g of getGroups(part)){
+    out.push({id:g.id, title:g.title, score:scoreGroup(part,g)});
+  }
+  return out;
+}
 
-function closeOverlay() {{
-  document.getElementById('overlay').style.display='none';
-  document.getElementById('modal').style.display='none';
-  document.getElementById('sheet').style.display='none';
-}}
-document.getElementById('overlay').addEventListener('click', closeOverlay);
-document.getElementById('modalClose').addEventListener('click', closeOverlay);
-document.getElementById('sheetClose').addEventListener('click', closeOverlay);
+function dominantNature(){
+  const a = scoresForPart("part1");
+  let max = Math.max(...a.map(x=>x.score), 0);
+  const top = a.filter(x=>x.score===max && max>0);
+  return {max, top, all:a};
+}
 
-function seeMoreBlock(title, text) {{
-  const style = document.getElementById('seeMoreStyle')?.value || 'details';
-  const cleaned = (text || '').replace(/\s+/g,' ').trim();
-  if (!cleaned) return document.createTextNode('');
-  if (style === 'details') {{
-    const d = document.createElement('details');
-    const s = document.createElement('summary');
-    s.textContent = title;
-    const p = document.createElement('pre');
-    p.textContent = cleaned;
-    d.appendChild(s);
-    d.appendChild(p);
-    return d;
-  }}
-  const btn = document.createElement('button');
-  btn.type='button';
-  btn.textContent = title;
-  btn.addEventListener('click', ()=>openOverlay(title, cleaned, style));
-  return btn;
-}}
+function el(tag, attrs={}, ...children){
+  const n=document.createElement(tag);
+  for(const [k,v] of Object.entries(attrs||{})){
+    if(k==="class") n.className=v;
+    else if(k==="html") n.innerHTML=v;
+    else if(k.startsWith("on") && typeof v==="function") n.addEventListener(k.slice(2), v);
+    else n.setAttribute(k, v);
+  }
+  for(const c of children){
+    if(c==null) continue;
+    if(typeof c==="string") n.appendChild(document.createTextNode(c));
+    else n.appendChild(c);
+  }
+  return n;
+}
 
-function renderGroups(targetId, partKey, includeSeeMore) {{
-  const host = document.getElementById(targetId);
-  host.innerHTML = '';
-  for (const g of DATA[partKey].groups) {{
-    const card = document.createElement('div');
-    card.className = 'card';
-    const meta = document.createElement('div');
-    meta.className = 'group-meta';
-    const h2 = document.createElement('h2');
-    h2.textContent = g.label;
-    const score = document.createElement('div');
-    score.className = 'group-score';
-    score.id = `score-${{g.id}}`;
-    score.textContent = 'Score: 0';
-    meta.appendChild(h2);
-    meta.appendChild(score);
+function renderHeader(){
+  const pr = progress();
+  document.getElementById("progressText").textContent = `${pr.answered}/${pr.total}`;
+}
 
-    const list = document.createElement('div');
-    list.className = 'list';
+function renderTabs(){
+  const wrap = document.getElementById("tabs");
+  wrap.innerHTML="";
+  const mk=(id,label)=>el("button",{
+    class:"tabBtn",
+    type:"button",
+    role:"tab",
+    "aria-selected": STATE.tab===id ? "true":"false",
+    onclick: ()=>{
+      STATE.tab=id;
+      saveState();
+      renderAll();
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+  }, label);
+  wrap.appendChild(mk("part1","Part 1"));
+  wrap.appendChild(mk("part2","Part 2"));
+  wrap.appendChild(mk("results","Results"));
+}
 
-    g.items.forEach((txt, idx) => {{
-      const item = document.createElement('div');
-      item.className = 'item';
-      const p = document.createElement('p');
-      p.className = 'item-text';
-      p.textContent = txt;
-      item.appendChild(p);
-      item.appendChild(triControl(g.id, idx));
-      list.appendChild(item);
-    }});
+function renderInstructions(){
+  const host=document.getElementById("instructions");
+  host.innerHTML="";
+  const how = el("details",{class:"details", open:true},
+    el("summary",{}, "How to answer"),
+    el("div",{class:"content", html: `
+      <div><strong>Pick one per statement:</strong></div>
+      <ul>
+        <li><strong>Unanswered</strong> if you’re unsure or want to skip for now.</li>
+        <li><strong>False</strong> if it does not describe you.</li>
+        <li><strong>True</strong> if it describes you.</li>
+      </ul>
+      <div class="legend">
+        <div class="legendItem"><span class="swatch u"></span> Unanswered</div>
+        <div class="legendItem"><span class="swatch f"></span> False</div>
+        <div class="legendItem"><span class="swatch t"></span> True</div>
+      </div>
+    `})
+  );
+  host.appendChild(how);
 
-    card.appendChild(meta);
+  const extra = el("details",{class:"details"},
+    el("summary",{}, "About this test"),
+    el("div",{class:"content", html: `<pre>${escapeHtml((DATA.part1.instructions||"").trim())}</pre>`})
+  );
+  host.appendChild(extra);
+}
 
-    if (includeSeeMore) {{
-      const moreWrap = document.createElement('div');
-      moreWrap.className = 'small-actions';
-      if (partKey === 'part1') {{
-        moreWrap.appendChild(seeMoreBlock('See more: Nature description', DATA.part1.descriptions[g.short]));
-      }} else {{
-        moreWrap.appendChild(seeMoreBlock('See more: Deficiency description', DATA.part2.deficiencyText[g.short]));
-        moreWrap.appendChild(seeMoreBlock('See more: Booster recommendations table', DATA.part2.boostersText[g.short]));
-      }}
-      card.appendChild(moreWrap);
-    }}
+function escapeHtml(s){
+  return String(s)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;");
+}
+
+function renderPart(part){
+  const host=document.getElementById("content");
+  host.innerHTML="";
+  renderInstructions();
+
+  const groups=getGroups(part);
+  for(const g of groups){
+    const sc=scoreGroup(part,g);
+    const card=el("div",{class:"card"});
+    const head=el("div",{class:"cardHeader"});
+    const left=el("div",{},
+      el("h2",{}, `${g.id}. ${g.title}`),
+      el("div",{class:"sub"}, (g.subtitle||"").trim())
+    );
+    const right=el("div",{class:"groupScore"}, `${sc}/${(g.items||[]).length}`);
+    head.appendChild(left); head.appendChild(right);
+    card.appendChild(head);
+    card.appendChild(el("div",{class:"divider"}));
+
+    const list=el("div",{class:"qList"});
+    (g.items||[]).forEach((txt, idx)=>{
+      const k=keyFor(part,g.id,idx);
+      const val = STATE.answers[k] || "u";
+
+      const seg=el("div",{class:"seg", role:"group", "aria-label":`Answer for statement ${idx+1}`});
+      const btn=(code,label)=>el("button",{
+        type:"button",
+        class: (val===code ? `active ${code}` : ""),
+        "data-code":code,
+        onclick:()=>{
+          STATE.answers[k]=code;
+          saveState();
+          flashSaved();
+          // rerender only this row + header stats
+          renderAll(false);
+        }
+      }, label);
+
+      seg.appendChild(btn("u","—"));
+      seg.appendChild(btn("f","F"));
+      seg.appendChild(btn("t","T"));
+
+      const row=el("div",{class:"qRow"});
+      const top=el("div",{class:"qTop"});
+      top.appendChild(el("p",{class:"qText"}, txt));
+      top.appendChild(seg);
+
+      row.appendChild(top);
+      row.appendChild(el("p",{class:"hint"}, "Tap: — Unanswered, F False, T True"));
+      list.appendChild(row);
+    });
 
     card.appendChild(list);
     host.appendChild(card);
-  }}
-}}
+  }
+}
 
-function scoreGroup(groupId) {{
-  const answers = appState[groupId] || [];
-  let t = 0;
-  for (const a of answers) if (a === true) t++;
-  return t;
-}}
+function renderResults(){
+  const host=document.getElementById("content");
+  host.innerHTML="";
+  renderInstructions();
 
-function severityFor(neuro, score) {{
-  const rules = (neuro === 'GABA') ? DATA.part2.severityRules.GABA : DATA.part2.severityRules.default;
-  const [mn0,mn1] = rules.minor;
-  const [md0,md1] = rules.moderate;
-  const [mj0,mj1] = rules.major;
-  if (mj1 === null) {{
-    if (score >= mj0) return 'Major';
-  }} else if (score >= mj0 && score <= mj1) return 'Major';
-  if (score >= md0 && score <= md1) return 'Moderate';
-  if (score >= mn0 && score <= mn1) return 'Minor';
-  return 'None';
-}}
+  const card=el("div",{class:"card"});
+  card.appendChild(el("h2",{}, "Scores"));
+  card.appendChild(el("div",{class:"divider"}));
 
-function computeProgress() {{
-  let total = 0;
-  let answered = 0;
-  for (const part of ['part1','part2']) {{
-    for (const g of DATA[part].groups) {{
-      const arr = appState[g.id] || [];
-      total += g.items.length;
-      for (const v of arr) if (v !== null) answered++;
-    }}
-  }}
-  return {{answered,total}};
-}}
+  const grid=el("div",{class:"resultsGrid"});
 
-function updateAllBadges() {{
-  for (const part of ['part1','part2']) {{
-    for (const g of DATA[part].groups) {{
-      const el = document.getElementById(`score-${{g.id}}`);
-      if (el) el.textContent = `Score: ${{scoreGroup(g.id)}} (True)`;
-    }}
-  }}
-  const p = computeProgress();
-  document.getElementById('progressBadge').textContent = `Progress: ${{p.answered}}/${{p.total}}`;
+  const block=(title, items, extraHtml="")=>{
+    const c=el("div",{class:"card", style:"margin:0; box-shadow:none"});
+    c.appendChild(el("h2",{}, title));
+    c.appendChild(el("div",{class:"divider"}));
+    const ul=el("div",{class:"qList"});
+    items.forEach(it=>{
+      ul.appendChild(el("div",{class:"qRow"},
+        el("div",{class:"qTop"},
+          el("p",{class:"qText"}, it.title),
+          el("div",{class:"groupScore"}, String(it.score))
+        )
+      ));
+    });
+    c.appendChild(ul);
+    if(extraHtml){
+      c.appendChild(el("div",{class:"divider"}));
+      c.appendChild(el("div",{class:"sub", html: extraHtml}));
+    }
+    return c;
+  };
 
-  const fs = document.getElementById('footerScores');
-  fs.innerHTML = '';
-  for (const g of DATA.part1.groups) {{
-    const b = document.createElement('div');
-    b.className='badge';
-    b.textContent = `${{g.id}}: ${{scoreGroup(g.id)}}`;
-    fs.appendChild(b);
-  }}
-  for (const g of DATA.part2.groups) {{
-    const b = document.createElement('div');
-    b.className='badge';
-    b.textContent = `${{g.id}}: ${{scoreGroup(g.id)}}`;
-    fs.appendChild(b);
-  }}
+  const p1=scoresForPart("part1");
+  const dom=dominantNature();
+  let domHtml="";
+  if(dom.max===0){
+    domHtml = "No dominant type yet (no True answers in Part 1).";
+  }else if(dom.top.length===1){
+    domHtml = `Dominant: <strong>${dom.top[0].title}</strong> (score ${dom.max}).`;
+  }else{
+    domHtml = `Tie: <strong>${dom.top.map(x=>x.title).join(", ")}</strong> (score ${dom.max}).`;
+  }
 
-  if (document.getElementById('tab-results').getAttribute('aria-selected') === 'true') renderResults();
-}}
+  grid.appendChild(block("Part 1 (A) — Dominant nature", p1, domHtml));
 
-function renderResults() {{
-  const rb = document.getElementById('resultsBody');
-  rb.innerHTML = '';
+  const p2=scoresForPart("part2");
+  grid.appendChild(block("Part 2 (B) — Deficiencies", p2, "Severity is interpreted exactly per the original test’s printed scoring tables."));
 
-  const aScores = DATA.part1.groups.map(g=>({{id:g.id, name:g.short, score:scoreGroup(g.id)}}));
-  const maxA = Math.max(...aScores.map(x=>x.score));
-  const topA = aScores.filter(x=>x.score===maxA);
+  card.appendChild(grid);
 
-  const block1 = document.createElement('div');
-  block1.className='card';
-  block1.style.margin='0 0 14px 0';
+  // Long descriptions / recommendations
+  const details = el("details",{class:"details", open:false},
+    el("summary",{}, "See more: descriptions and recommendations"),
+    el("div",{class:"content", html: renderLongTextHtml() })
+  );
+  card.appendChild(el("div",{class:"divider"}));
+  card.appendChild(details);
 
-  const h = document.createElement('h2');
-  h.textContent = 'Part 1: Dominant nature';
-  const p = document.createElement('p');
-  p.textContent = (topA.length===1)
-    ? `Highest: ${{topA[0].name}} (${{topA[0].score}})`
-    : `Tie for highest: ${{topA.map(x=>x.name).join(', ')}} (${{maxA}})`;
-  block1.appendChild(h);
-  block1.appendChild(p);
+  host.appendChild(card);
+}
 
-  const badges = document.createElement('div');
-  badges.className='small-actions';
-  for (const s of aScores) {{
-    const b = document.createElement('div');
-    b.className='badge';
-    b.textContent = `${{s.id}} ${{s.name}}: ${{s.score}}`;
-    badges.appendChild(b);
-  }}
-  block1.appendChild(badges);
+function renderLongTextHtml(){
+  // DATA.longText is an array of sections with title/body in v2.
+  const sections = (DATA.longText && Array.isArray(DATA.longText)) ? DATA.longText : [];
+  if(!sections.length) return "<div>No additional text found in source data.</div>";
+  return sections.map(s=>{
+    const t = escapeHtml(s.title||"");
+    const b = escapeHtml((s.body||"").trim());
+    return `<div style="margin:10px 0 14px">
+      <div style="font-weight:800; color: var(--text); margin-bottom:6px">${t}</div>
+      <pre>${b}</pre>
+    </div>`;
+  }).join("");
+}
 
-  for (const t of topA) {{
-    block1.appendChild(seeMoreBlock(`See more: ${{t.name}} nature (full text)`, DATA.part1.descriptions[t.name]));
-  }}
-  rb.appendChild(block1);
+function renderSticky(){
+  const pr=progress();
+  document.getElementById("stickyProgress").textContent = `Progress: ${pr.answered}/${pr.total}`;
+}
 
-  const bScores = DATA.part2.groups.map(g=>({{id:g.id, name:g.short, score:scoreGroup(g.id)}}));
-  const block2 = document.createElement('div');
-  block2.className='card';
-  block2.style.margin='0';
+function renderAll(scrollPreserve=true){
+  renderHeader();
+  renderTabs();
 
-  const h2 = document.createElement('h2');
-  h2.textContent = 'Part 2: Deficiencies';
-  block2.appendChild(h2);
+  const main=document.getElementById("mainTitle");
+  main.textContent = DATA.meta.title || "Assessment";
 
-  const row = document.createElement('div');
-  row.className='small-actions';
-  for (const s of bScores) {{
-    const sev = severityFor(s.name, s.score);
-    const b = document.createElement('div');
-    b.className='badge';
-    b.textContent = `${{s.id}} ${{s.name}}: ${{s.score}} (${{sev}})`;
-    row.appendChild(b);
-  }}
-  block2.appendChild(row);
+  const saved = document.getElementById("savedFlag");
+  if(saved) saved.textContent = "";
 
-  for (const s of bScores) {{
-    block2.appendChild(seeMoreBlock(`See more: ${{s.name}} deficiency (full text)`, DATA.part2.deficiencyText[s.name]));
-    block2.appendChild(seeMoreBlock(`See more: ${{s.name}} boosters (table + notes)`, DATA.part2.boostersText[s.name]));
-  }}
+  if(STATE.tab==="part1") renderPart("part1");
+  else if(STATE.tab==="part2") renderPart("part2");
+  else renderResults();
 
-  rb.appendChild(block2);
-}}
+  renderSticky();
+}
 
-function resetAll() {{
-  localStorage.removeItem(STORAGE_KEY);
-  appState = defaultAnswerState();
-  saveState(appState);
-  renderGroups('part1Groups','part1',true);
-  renderGroups('part2Groups','part2',true);
-  updateAllBadges();
-}}
+function wireButtons(){
+  document.getElementById("btnResults").addEventListener("click", ()=>{
+    STATE.tab="results"; saveState(); renderAll(); window.scrollTo({top:0, behavior:"smooth"});
+  });
+  document.getElementById("btnReset").addEventListener("click", ()=>{
+    if(confirm("Reset all answers? This clears saved progress.")){
+      localStorage.removeItem(STORAGE_KEY);
+      STATE.answers={};
+      STATE.tab="part1";
+      renderAll();
+    }
+  });
+}
 
-document.getElementById('resetBtn').addEventListener('click', resetAll);
-document.getElementById('resetBtn2').addEventListener('click', resetAll);
+loadState();
+document.addEventListener("DOMContentLoaded", ()=>{
+  wireButtons();
+  renderAll();
+});
 
-document.getElementById('exportBtn').addEventListener('click', ()=>{{
-  const payload = {{
-    savedAt: new Date().toISOString(),
-    answers: appState
-  }};
-  openOverlay('Export answers (JSON)', JSON.stringify(payload, null, 2), 'modal');
-}});
-
-document.getElementById('seeMoreStyle').addEventListener('change', ()=> {{
-  renderGroups('part1Groups','part1',true);
-  renderGroups('part2Groups','part2',true);
-  updateAllBadges();
-}});
-
-document.getElementById('p1Instr').textContent = DATA.part1.instructions;
-document.getElementById('p2Instr').textContent = DATA.part2.instructions;
-
-renderGroups('part1Groups','part1',true);
-renderGroups('part2Groups','part2',true);
-updateAllBadges();
 </script>
 </body>
 </html>
