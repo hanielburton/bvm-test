@@ -15,7 +15,7 @@ a{color:inherit}
 .container{max-width:980px;margin:0 auto;padding:18px 14px 88px}
 h1{font-size:34px;letter-spacing:-.02em;margin:10px 2px 8px;line-height:1.1}
 .subbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 2px 14px}
-.pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--border);border-radius:999px;background:#fff;box-shadow:var(--shadow)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--border);border-radius:999px;background:var(--card);box-shadow:var(--shadow)}
 .pill strong{font-weight:800}
 .saved-dot{width:10px;height:10px;border-radius:99px;background:#94a3b8}
 .saved-dot.on{background:#22c55e}
@@ -88,10 +88,23 @@ details>summary::-webkit-details-marker{display:none}
 
 /* Dark mode (toggleable; can follow system in settings) */
 body.autoDark{
-  --bg:#0b1220;--card:#0f172a;--rowbg:#111b2e;--border:#223047;--text:#e5e7eb;--muted:#9aa7bd;
+  --bg:#0b1220;--card:#0f172a;--rowbg:#0b1426;--border:#223047;--text:#f1f5f9;--muted:#cbd5e1;
   --btnbg:#0b1426;
   --shadow:0 1px 0 rgba(0,0,0,.35),0 14px 40px rgba(0,0,0,.35);
 }
+body.autoDark a, body.autoDark summary{color:var(--text)}
+body.autoDark .pill{background:var(--card)}
+body.autoDark .small{color:var(--muted)}
+body.autoDark .subbar .pill strong{color:var(--text)}
+body.autoDark .saved-dot{box-shadow:0 0 0 3px rgba(255,255,255,.06) inset}
+body.autoDark .modal{border-color:var(--border)}
+body.autoDark .modalHead{border-bottom-color:var(--border)}
+body.autoDark .modalFoot{border-top-color:var(--border)}
+body.autoDark .hint{color:var(--muted)}
+body.autoDark .tabbtn{background:rgba(255,255,255,.04)}
+body.autoDark .toggle{background:rgba(255,255,255,.03)}
+body.autoDark .tbtn.false.active{color:#0b1220}
+
 body.autoDark .tabbtn{background:rgba(255,255,255,.04)}
 body.autoDark .toggle{background:rgba(255,255,255,.03)}
 body.autoDark .tbtn.false.active{color:#0b1220}
@@ -147,12 +160,12 @@ body.autoDark .tbtn.false.active{color:#0b1220}
     <div class="modalBody">
       <div class="field">
         <label for="trueColor"><strong>True color</strong></label>
-        <input type="color" id="trueColor" />
+        <input type="color" id="trueColor" value="#14532d" oninput="setTFColor('true', this.value)" onchange="setTFColor('true', this.value)" />
       </div>
 
       <div class="field">
         <label for="falseColor"><strong>False color</strong></label>
-        <input type="color" id="falseColor" />
+        <input type="color" id="falseColor" value="#d4af37" oninput="setTFColor('false', this.value)" onchange="setTFColor('false', this.value)" />
       </div>
 
       <div class="field row">
@@ -222,6 +235,14 @@ if(_colorSchemeMql){
     // Safari < 14
     try{ _colorSchemeMql.addListener(handler); }catch(e2){}
   }
+}
+
+function setTFColor(which, value){
+  if(!value) return;
+  if(which === 'true') settings.trueColor = value;
+  if(which === 'false') settings.falseColor = value;
+  saveSettings();
+  applySettings();
 }
 
 function openSettings(){
