@@ -7,7 +7,7 @@
 <style>
 :root{
   --bg:#f6f7f9;--card:#fff;--border:#d7dde6;--text:#0f172a;--muted:#64748b;
-  --true:#14532d;--false:#d4af37;--shadow:0 1px 0 rgba(15,23,42,.04),0 8px 30px rgba(15,23,42,.06);
+  --true:#14532d;--false:#d4af37;--rowbg:#ffffff;--btnbg:#f8fafc;--shadow:0 1px 0 rgba(15,23,42,.04),0 8px 30px rgba(15,23,42,.06);
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -32,10 +32,10 @@ details>summary::-webkit-details-marker{display:none}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1px solid #eef2f7;margin-bottom:12px}
 .section-title{font-size:22px;font-weight:900;letter-spacing:-.01em}
 .section-count{font-size:14px;color:var(--muted);font-weight:800}
-.qrow{display:flex;gap:12px;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:18px;padding:12px 12px;margin:10px 0;background:#fff}
+.qrow{display:flex;gap:12px;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:18px;padding:12px 12px;margin:10px 0;background:var(--rowbg)}
 .qtext{font-size:16px;line-height:1.25;flex:1;min-width:0}
 .toggle{display:flex;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden;flex:0 0 auto}
-.tbtn{appearance:none;border:0;background:#f8fafc;padding:10px 14px;font-weight:900;min-width:52px}
+.tbtn{appearance:none;border:0;background:var(--btnbg);color:var(--text);padding:10px 14px;font-weight:900;min-width:52px}
 .tbtn.true.active{background:var(--true);color:#fff}
 .tbtn.false.active{background:var(--false);color:#111827}
 .small{font-size:13px;color:var(--muted)}
@@ -51,6 +51,7 @@ details>summary::-webkit-details-marker{display:none}
 }
 
 /* Settings modal */
+.modalOverlay[hidden]{display:none !important;}
 .modalOverlay{
   position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
   padding:16px;background:rgba(15,23,42,.45);backdrop-filter:saturate(140%) blur(6px);
@@ -71,6 +72,12 @@ details>summary::-webkit-details-marker{display:none}
   font-weight:900;color:var(--muted);
 }
 .modalBody{padding:14px;display:flex;flex-direction:column;gap:12px}
+
+.modalFooter{
+  padding:12px 14px;border-top:1px solid var(--border);
+  display:flex;justify-content:flex-end;gap:10px;
+}
+.modalFooter .actionbtn{flex:0 0 auto}
 .field{display:flex;flex-direction:column;gap:6px}
 .field.row{flex-direction:row;align-items:center;gap:10px}
 .field input[type="color"]{
@@ -79,15 +86,15 @@ details>summary::-webkit-details-marker{display:none}
 }
 .field input[type="checkbox"]{width:18px;height:18px}
 
-/* Optional dark mode (follows system when enabled) */
-@media (prefers-color-scheme: dark){
-  body.autoDark{
-    --bg:#0b1220;--card:#0f172a;--border:#1f2a3a;--text:#e5e7eb;--muted:#94a3b8;
-    --shadow:0 1px 0 rgba(0,0,0,.35),0 14px 40px rgba(0,0,0,.35);
-  }
-  body.autoDark .tabbtn{background:rgba(255,255,255,.04)}
-  body.autoDark .toggle{background:rgba(255,255,255,.03)}
+/* Dark mode (toggleable; can follow system in settings) */
+body.autoDark{
+  --bg:#0b1220;--card:#0f172a;--rowbg:#111b2e;--border:#223047;--text:#e5e7eb;--muted:#9aa7bd;
+  --btnbg:#0b1426;
+  --shadow:0 1px 0 rgba(0,0,0,.35),0 14px 40px rgba(0,0,0,.35);
 }
+body.autoDark .tabbtn{background:rgba(255,255,255,.04)}
+body.autoDark .toggle{background:rgba(255,255,255,.03)}
+body.autoDark .tbtn.false.active{color:#0b1220}
 
 </style>
 </head>
@@ -124,6 +131,9 @@ details>summary::-webkit-details-marker{display:none}
       <button class="actionbtn" id="openSettings" aria-haspopup="dialog" aria-controls="settingsModal">Settings</button>
       <button class="actionbtn" id="reset">Reset</button>
     </div>
+    <div class="modalFooter">
+      <button class="actionbtn" id="doneSettings">Done</button>
+    </div>
   </div>
 </div>
 
@@ -131,7 +141,7 @@ details>summary::-webkit-details-marker{display:none}
   <div class="modal" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
     <div class="modalHeader">
       <div class="modalTitle" id="settingsTitle">Settings</div>
-      <button class="iconbtn" id="closeSettings" aria-label="Close settings">✕</button>
+      <button class="iconbtn" id="closeSettings" type="button" aria-label="Close settings">✕</button>
     </div>
 
     <div class="modalBody">
@@ -146,11 +156,14 @@ details>summary::-webkit-details-marker{display:none}
       </div>
 
       <div class="field row">
-        <input type="checkbox" id="autoDark" />
-        <label for="autoDark"><strong>Dark mode</strong> (follow system setting)</label>
-      </div>
-
-      <div class="hint small">
+  <input type="checkbox" id="darkMode" />
+  <label for="darkMode"><strong>Dark mode</strong></label>
+</div>
+<div class="field row">
+  <input type="checkbox" id="followSystem" />
+  <label for="followSystem"><strong>Follow system</strong> (prefers-color-scheme)</label>
+</div>
+<div class="hint small">
         Changes save automatically in this browser.
       </div>
     </div>
@@ -160,16 +173,17 @@ details>summary::-webkit-details-marker{display:none}
 
 <script>
 
-const SETTINGS_KEY = "bvm_settings_v1";
+const SETTINGS_KEY = "bvm_settings_v2";
 
 function readCssVar(name){
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 }
 
 const defaultSettings = {
-  trueColor: readCssVar("--true") || "#14532d",
-  falseColor: readCssVar("--false") || "#d4af37",
-  autoDark: false
+  trueColor: "#14532d",
+  falseColor: "#d4af37",
+  darkMode: true,
+  followSystem: false
 };
 
 let settings = (() => {
@@ -190,7 +204,24 @@ function saveSettings(){
 function applySettings(){
   document.documentElement.style.setProperty("--true", settings.trueColor);
   document.documentElement.style.setProperty("--false", settings.falseColor);
-  document.body.classList.toggle("autoDark", !!settings.autoDark);
+
+  const mq = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+  const prefersDark = mq ? mq.matches : false;
+  const useDark = settings.followSystem ? prefersDark : !!settings.darkMode;
+  document.body.classList.toggle("autoDark", useDark);
+}
+
+
+// Re-apply when system appearance changes
+const _colorSchemeMql = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+if(_colorSchemeMql){
+  const handler = () => { if(settings.followSystem) applySettings(); };
+  try{
+    _colorSchemeMql.addEventListener("change", handler);
+  }catch(e){
+    // Safari < 14
+    try{ _colorSchemeMql.addListener(handler); }catch(e2){}
+  }
 }
 
 function openSettings(){
@@ -199,7 +230,9 @@ function openSettings(){
   // init inputs
   document.getElementById("trueColor").value = settings.trueColor;
   document.getElementById("falseColor").value = settings.falseColor;
-  document.getElementById("autoDark").checked = !!settings.autoDark;
+  document.getElementById("darkMode").checked = !!settings.darkMode;
+  document.getElementById("followSystem").checked = !!settings.followSystem;
+  document.getElementById("darkMode").disabled = !!settings.followSystem;
   // focus for accessibility
   document.getElementById("closeSettings").focus();
 }
@@ -387,21 +420,44 @@ document.getElementById("reset").addEventListener("click", ()=>{
 });
 
 
+document.addEventListener("DOMContentLoaded", ()=>{
 document.getElementById("openSettings").addEventListener("click", ()=>{ openSettings(); });
 
 document.getElementById("closeSettings").addEventListener("click", ()=>{ closeSettings(); });
+
+document.getElementById("doneSettings").addEventListener("click", ()=>{ closeSettings(); });
 
 document.getElementById("settingsOverlay").addEventListener("click", (e)=>{ if(e.target.id==="settingsOverlay") closeSettings(); });
 
 document.addEventListener("keydown", (e)=>{ if(e.key==="Escape"){ const ov=document.getElementById("settingsOverlay"); if(ov && !ov.hidden) closeSettings(); } });
 
-document.getElementById("trueColor").addEventListener("input", (e)=>{ settings.trueColor = e.target.value; saveSettings(); applySettings(); });
+const _trueColorEl = document.getElementById("trueColor");
+_trueColorEl.addEventListener("input", (e)=>{ settings.trueColor = e.target.value; saveSettings(); applySettings(); });
+_trueColorEl.addEventListener("change", (e)=>{ settings.trueColor = e.target.value; saveSettings(); applySettings(); });
 
-document.getElementById("falseColor").addEventListener("input", (e)=>{ settings.falseColor = e.target.value; saveSettings(); applySettings(); });
+const _falseColorEl = document.getElementById("falseColor");
+_falseColorEl.addEventListener("input", (e)=>{ settings.falseColor = e.target.value; saveSettings(); applySettings(); });
+_falseColorEl.addEventListener("change", (e)=>{ settings.falseColor = e.target.value; saveSettings(); applySettings(); });
 
-document.getElementById("autoDark").addEventListener("change", (e)=>{ settings.autoDark = !!e.target.checked; saveSettings(); applySettings(); });
+const _darkModeEl = document.getElementById("darkMode");
+const _followSystemEl = document.getElementById("followSystem");
+_darkModeEl.addEventListener("change", (e)=>{
+  settings.darkMode = !!e.target.checked;
+  saveSettings();
+  applySettings();
+});
+_followSystemEl.addEventListener("change", (e)=>{
+  settings.followSystem = !!e.target.checked;
+  // when following system, disable manual dark toggle
+  _darkModeEl.disabled = settings.followSystem;
+  saveSettings();
+  applySettings();
+});
 
 
+
+
+});
 renderCurrent();
 updateProgress();
 markSaved(Object.keys(state).length>0);
